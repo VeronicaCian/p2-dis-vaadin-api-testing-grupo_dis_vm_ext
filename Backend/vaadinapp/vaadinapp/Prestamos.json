@@ -17,10 +17,10 @@
   },
   {
     "id": 2,
-    "Usuario_Id": 2,
-    "Fecha_Inicio_Prestamo": "03/01/97",
-    "Fecha_Fin_Prestamo": "17/02/98",
-    "Fecha_Real_Dev": "17/02/98"
+    "Usuario_Id": 7,
+    "Fecha_Inicio_Prestamo": "24/01/97",
+    "Fecha_Fin_Prestamo": "27/02/98",
+    "Fecha_Real_Dev": "27/02/98"
   },
   {
     "id": 0,
@@ -37,5 +37,12 @@
     "Fecha_Fin_Prestamo": "23/09/2001",
     "Fecha_Real_Dev": "15/12/97",
     "Comentarios": ""
+  },
+  {
+    "id": 0,
+    "Usuario_Id": 7,
+    "Fecha_Inicio_Prestamo": "24/01/97",
+    "Fecha_Fin_Prestamo": "27/02/98",
+    "Fecha_Real_Dev": "27/02/98"
   }
 ]
