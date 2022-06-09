@@ -12,5 +12,13 @@
     "Departamento": "Contabilidad",
     "Ubicacion": "Pozuelo",
     "telefono": 0
+  },
+  {
+    "id": 3,
+    "Nombre": "Paula",
+    "Departamento": "RRHH",
+    "Ubicacion": "Madrid",
+    "telefono": 603434703,
+    "email": "paulaufv@gmail.com"
   }
 ]

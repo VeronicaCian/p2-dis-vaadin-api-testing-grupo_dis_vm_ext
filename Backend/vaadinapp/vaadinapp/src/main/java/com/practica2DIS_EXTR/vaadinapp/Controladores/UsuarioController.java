@@ -33,10 +33,10 @@ public class UsuarioController {
 
     }
 
-    @PutMapping(path = "/users",
+    @PutMapping(path = "/usuarios",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity modifyMarcador (@RequestBody Usuarios usuariomodificado) throws IOException {
+    public ResponseEntity modifyUsuario (@RequestBody Usuarios usuariomodificado) throws IOException {
 
 
         ArrayList<Usuarios> listamodified = utils.lecturaJSONUsuarios();
@@ -84,7 +84,7 @@ public class UsuarioController {
     private final AtomicInteger nuevoID = new AtomicInteger();
 
     //controlador POST para añadir un nuevo objeto al json
-    @PostMapping(value = "/user", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/usuario", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity newMarcador(@RequestBody Usuarios usuario){
 
         //instancio una nueva lectura dle JSON
@@ -118,7 +118,7 @@ public class UsuarioController {
     }
 
     //para buscar por id cojo el ide del elemento encontrado
-    @DeleteMapping(value = "/deleteMarcador/{id}")
+    @DeleteMapping(value = "/usuarios/{id}")
     public ResponseEntity deleteMarcador (@PathVariable int id) throws IOException{
 
 
@@ -141,7 +141,7 @@ public class UsuarioController {
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create(); //hacmeos que aparezca bonito en vez de en una linea
         FileWriter writer = null; //inicializamos el filewriter
-        String archivo = "ejemplo.json";
+        String archivo = "Usuarios.json";
 
         try{
             writer = new FileWriter(archivo);
