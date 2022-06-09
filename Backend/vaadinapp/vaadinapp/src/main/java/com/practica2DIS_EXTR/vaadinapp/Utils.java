@@ -22,7 +22,7 @@ public class Utils {
         Gson gson = new Gson();
 
         try{
-            br = new BufferedReader(new FileReader("ejemplo.json"));
+            br = new BufferedReader(new FileReader("Usuarios.json"));
 
         }catch (FileNotFoundException e){
             e.printStackTrace();
@@ -68,7 +68,7 @@ public class Utils {
         Gson gson = new Gson();
 
         try {
-            br = new BufferedReader(new FileReader("ejemplo.json"));
+            br = new BufferedReader(new FileReader("Prestamos.json"));
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
