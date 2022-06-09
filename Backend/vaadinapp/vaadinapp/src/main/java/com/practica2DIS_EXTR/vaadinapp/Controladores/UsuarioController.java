@@ -84,7 +84,7 @@ public class UsuarioController {
     private final AtomicInteger nuevoID = new AtomicInteger();
 
     //controlador POST para añadir un nuevo objeto al json
-    @PostMapping(value = "/newMarcador", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/user", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity newMarcador(@RequestBody Usuarios usuario){
 
         //instancio una nueva lectura dle JSON
