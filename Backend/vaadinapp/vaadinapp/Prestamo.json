@@ -29,13 +29,5 @@
     "Fecha_Fin_Prestamo": "15/11/97",
     "Fecha_Real_Dev": "15/12/97",
     "Comentarios": ""
-  },
-  {
-    "id": 1,
-    "Usuario_Id": 6,
-    "Fecha_Inicio_Prestamo": "15/11/96",
-    "Fecha_Fin_Prestamo": "23/09/2001",
-    "Fecha_Real_Dev": "15/12/97",
-    "Comentarios": ""
   }
 ]
