@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @RestController
 @RequestMapping("/api")
@@ -78,6 +79,9 @@ public class UsuarioController {
 
 
     }
+
+    //instancion la varible de Java para incrementar el id al añadir uno nuevo
+    private final AtomicInteger nuevoID = new AtomicInteger();
 
     //controlador POST para añadir un nuevo objeto al json
     @PostMapping(value = "/newMarcador", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
