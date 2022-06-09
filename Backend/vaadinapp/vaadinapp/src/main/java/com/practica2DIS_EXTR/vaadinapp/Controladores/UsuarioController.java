@@ -116,4 +116,50 @@ public class UsuarioController {
         return new ResponseEntity(HttpStatus.OK);
 
     }
+
+    //para buscar por id cojo el ide del elemento encontrado
+    @DeleteMapping(value = "/deleteMarcador/{id}")
+    public ResponseEntity deleteMarcador (@PathVariable int id) throws IOException{
+
+
+        Boolean encontrado = false;
+        Usuarios user = null;
+        int identificador = id;
+
+        ArrayList<Usuarios> listamarcadores = utils.lecturaJSONUsuarios();
+
+        int i = 0;
+        while(!encontrado && i < listamarcadores.size()){
+            Usuarios u = listamarcadores.get(i);
+            if(identificador == u.getId()){
+                encontrado = true;
+                user = u;
+                listamarcadores.remove(user);
+            }
+            i++;
+        }
+
+        Gson gson = new GsonBuilder().setPrettyPrinting().create(); //hacmeos que aparezca bonito en vez de en una linea
+        FileWriter writer = null; //inicializamos el filewriter
+        String archivo = "ejemplo.json";
+
+        try{
+            writer = new FileWriter(archivo);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+        gson.toJson(listamarcadores,writer);
+
+        try {
+            writer.close();
+        } catch (IOException e2) {
+            e2.printStackTrace();
+        }
+
+        return new ResponseEntity(HttpStatus.ACCEPTED);
+
+
+
+    }
 }
