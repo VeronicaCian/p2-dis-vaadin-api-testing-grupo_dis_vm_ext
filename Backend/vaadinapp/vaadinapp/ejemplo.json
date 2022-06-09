@@ -1,0 +1,24 @@
+[
+  {
+    "id": 0,
+    "Nombre": "Miguel",
+    "Departamento": "Informatica",
+    "Ubicacion": "Madrid",
+    "telefono": 0
+  },
+  {
+    "id": 1,
+    "Nombre": "Pablo",
+    "Departamento": "Contabilidad",
+    "Ubicacion": "Pozuelo",
+    "telefono": 0
+  },
+  {
+    "id": 3,
+    "Nombre": "Paula",
+    "Departamento": "RRHH",
+    "Ubicacion": "Madrid",
+    "telefono": 603434703,
+    "email": "paulaufv@gmail.com"
+  }
+]
