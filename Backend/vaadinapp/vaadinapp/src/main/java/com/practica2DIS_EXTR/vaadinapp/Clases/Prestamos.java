@@ -12,7 +12,7 @@ public class Prestamos {
 
     @JsonProperty("Fecha_Inicio_Prestamo")
     private String Fecha_Inicio_Prestamo;
-    
+
     @JsonProperty("Fecha_Fin_Prestamo")
     private String Fecha_Fin_Prestamo;
 
