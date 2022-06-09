@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Usuarios {
 
+<<<<<<< HEAD
     //atributos
     @JsonProperty("id")
     private int id;
@@ -84,4 +85,6 @@ public class Usuarios {
     public void setId(int id) {
         this.id = id;
     }
+=======
+>>>>>>> ef4088831d6852a8a8762252d64640fe09f65168
 }
