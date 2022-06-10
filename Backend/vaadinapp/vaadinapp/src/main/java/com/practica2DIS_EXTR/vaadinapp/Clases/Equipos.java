@@ -1,5 +1,6 @@
 package com.practica2DIS_EXTR.vaadinapp.Clases;
 
+<<<<<<< HEAD
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -30,10 +31,29 @@ public class Equipos {
 
     @JsonProperty("Software")
     private Software software;
+=======
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class Equipos {
+
+    @JsonProperty("id_Equipo")
+    private int id_Equipo;
+
+    @JsonProperty("Tipo")
+    private String Tipo;
+
+    @JsonProperty("Marca")
+    private String Marca;
+
+    @JsonProperty("Uso")
+    private String Uso;
+
+>>>>>>> e5e7b24bc52fb6144610b586492af9e98400f874
 
     private Equipos(){
 
     }
+<<<<<<< HEAD
 
     public Equipos(int idEquipo,String tipo, String marca, String uso, Sistema_Operativo sistemaoperativo, Hardware hardware, Software software){
         this.idEquipo = idEquipo;
@@ -99,5 +119,44 @@ public class Equipos {
 
     public void setIdEquipo(int idEquipo) {
         this.idEquipo = idEquipo;
+=======
+    public Equipos(int id_Equipo, String Tipo, String Marca, String Uso) {
+        this.id_Equipo = id_Equipo;
+        this.Tipo = Tipo;
+        this.Marca = Marca;
+        this.Uso = Uso;
+    }
+
+    public int getId_Equipo() {
+        return id_Equipo;
+    }
+
+    public void setId_Equipo(int id_Equipo) {
+        this.id_Equipo = id_Equipo;
+    }
+
+    public String getTipo() {
+        return Tipo;
+    }
+
+    public void setTipo(String tipo) {
+        Tipo = tipo;
+    }
+
+    public String getMarca() {
+        return Marca;
+    }
+
+    public void setMarca(String marca) {
+        Marca = marca;
+    }
+
+    public String getUso() {
+        return Uso;
+    }
+
+    public void setUso(String uso) {
+        Uso = uso;
+>>>>>>> e5e7b24bc52fb6144610b586492af9e98400f874
     }
 }
