@@ -18,8 +18,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @RequestMapping("/api")
 public class UsuarioController {
 
-<<<<<<< HEAD
-=======
+
     //clase controlador para los usuarios
 
     Utils utils = new Utils();
@@ -193,5 +192,5 @@ public class UsuarioController {
 
 
     }
->>>>>>> usercontroler
+
 }
