@@ -5,16 +5,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Hardware {
 
     @JsonProperty("Procesador")
-    private String procesador;
+    public String procesador;
 
     @JsonProperty("Memoria")
-    private double memoria;
+    public double memoria;
 
     @JsonProperty("Disco_Duro")
-    private Disco_Duro discoduro;
+    public Disco_Duro discoduro;
 
     @JsonProperty("Pantalla")
-    private Pantalla pantalla;
+    public Pantalla pantalla;
 
     private Hardware(){
 

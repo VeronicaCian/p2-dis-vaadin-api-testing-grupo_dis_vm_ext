@@ -5,10 +5,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Pantalla {
 
     @JsonProperty("Diagonal")
-    private int diagonal;
+    public int diagonal;
 
     @JsonProperty("Resolucion")
-    private String resolucion;
+    public String resolucion;
 
     private  Pantalla(){
 

@@ -5,13 +5,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Licencia_Pago {
 
     @JsonProperty("NombreSP")
-    private String nombreSP;
+    public String nombreSP;
 
     @JsonProperty("VersionSP")
-    private String versionSP;
+    public String versionSP;
 
     @JsonProperty("TipoSP")
-    private String tipoSP;
+    public String tipoSP;
 
     private Licencia_Pago(){
 

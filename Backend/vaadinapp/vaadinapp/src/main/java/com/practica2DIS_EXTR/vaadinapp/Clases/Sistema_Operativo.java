@@ -7,10 +7,10 @@ public class Sistema_Operativo {
     //atributos del sistema operativo
 
     @JsonProperty("nombreSO")
-    private String nombreSO;
+    public String nombreSO;
 
     @JsonProperty("versionSO")
-    private String versionSO;
+    public String versionSO;
 
     private Sistema_Operativo(){
 
