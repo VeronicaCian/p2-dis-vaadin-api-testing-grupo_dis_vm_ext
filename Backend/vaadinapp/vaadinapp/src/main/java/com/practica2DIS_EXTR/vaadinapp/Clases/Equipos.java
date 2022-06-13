@@ -2,7 +2,6 @@ package com.practica2DIS_EXTR.vaadinapp.Clases;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE)
 
@@ -11,6 +10,7 @@ public class Equipos {
     //atributos de equipos con sus respectivas llamadas a otras clases
 
     @JsonProperty("id_equipo")
+<<<<<<< HEAD
     public int idEquipo;
 
     @JsonProperty("Tipo")
@@ -30,74 +30,99 @@ public class Equipos {
 
     @JsonProperty("Software")
     public Software software;
+=======
+    private int id_equipo;
+
+    @JsonProperty("Tipo")
+    private String Tipo;
+
+    @JsonProperty("Marca")
+    private  String Marca;
+
+    @JsonProperty("Uso")
+    private String Uso;
+
+    @JsonProperty("Sistema_operativo")
+    private Sistema_Operativo Sistema_operativo;
+
+    @JsonProperty("Hardware")
+    private Hardware Hardware;
+
+    @JsonProperty("Software")
+    private Software Software;
+>>>>>>> e5be2907c81630faa14e5593c722c2d0895426b8
 
     private Equipos(){
 
     }
 
-    public Equipos(int idEquipo,String tipo, String marca, String uso, Sistema_Operativo sistemaoperativo, Hardware hardware, Software software){
-        this.idEquipo = idEquipo;
-        this.tipo = tipo;
-        this.marca = marca;
-        this.sistemaoperativo = sistemaoperativo;
-        this.hardware = hardware;
-        this.software = software;
-        this.uso = uso;
+    public Equipos(int id_equipo,String Tipo, String Marca, String Uso, Sistema_Operativo Sistema_operativo, Hardware Hardware, Software Software){
+        this.id_equipo = id_equipo;
+        this.Tipo = Tipo;
+        this.Marca = Marca;
+        this.Sistema_operativo = Sistema_operativo;
+        this.Hardware = Hardware;
+        this.Software = Software;
+        this.Uso = Uso;
     }
 
     public Software getSoftware() {
-        return software;
+        return Software;
     }
 
     public void setSoftware(Software software) {
-        this.software = software;
+        this.Software = Software;
     }
 
     public Hardware getHardware() {
-        return hardware;
+        return Hardware;
     }
 
     public void setHardware(Hardware hardware) {
-        this.hardware = hardware;
+        this.Hardware = hardware;
     }
 
-    public Sistema_Operativo getSistemaoperativo() {
-        return sistemaoperativo;
+    public Sistema_Operativo getSistema_operativo() {
+        return Sistema_operativo;
     }
 
     public void setSistemaoperativo(Sistema_Operativo sistemaoperativo) {
-        this.sistemaoperativo = sistemaoperativo;
+        this.Sistema_operativo = Sistema_operativo;
     }
 
     public String getUso() {
-        return uso;
+        return Uso;
     }
 
     public void setUso(String uso) {
-        this.uso = uso;
+        this.Uso = Uso;
     }
 
     public String getMarca() {
-        return marca;
+        return Marca;
     }
 
     public void setMarca(String marca) {
-        this.marca = marca;
+        this.Marca = marca;
     }
 
     public String getTipo() {
-        return tipo;
+        return Tipo;
     }
 
     public void setTipo(String tipo) {
-        this.tipo = tipo;
+        this.Tipo = tipo;
     }
 
     public int getIdEquipo() {
-        return idEquipo;
+        return id_equipo;
     }
 
     public void setIdEquipo(int idEquipo) {
+<<<<<<< HEAD
         this.idEquipo = idEquipo;
+=======
+        this.id_equipo = id_equipo;
+>>>>>>> e5be2907c81630faa14e5593c722c2d0895426b8
     }
 }

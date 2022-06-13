@@ -10,7 +10,7 @@
         },
         "Hardware":{
             "Procesador": "Intel core i7",
-            "Memoria": 3.2,
+    "Memoria": 3.2,
             "Disco_Duro":{
                 "tipo_disco": "SSD",
                 "capacidad": "1TB"

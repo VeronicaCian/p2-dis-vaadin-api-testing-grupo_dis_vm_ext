@@ -2,7 +2,6 @@ package com.practica2DIS_EXTR.vaadinapp.Controladores;
 
 
 import com.practica2DIS_EXTR.vaadinapp.Clases.Equipos;
-import com.practica2DIS_EXTR.vaadinapp.Clases.Usuarios;
 import com.practica2DIS_EXTR.vaadinapp.Utils;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
