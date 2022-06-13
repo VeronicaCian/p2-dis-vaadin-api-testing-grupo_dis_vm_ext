@@ -1,49 +1,51 @@
 package com.practica2DIS_EXTR.vaadinapp.Clases;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE)
 
 public class Licencia_Pago {
 
     @JsonProperty("NombreSP")
-    public String nombreSP;
+    public String NombreSP;
 
     @JsonProperty("VersionSP")
-    public String versionSP;
+    public String VersionSP;
 
     @JsonProperty("TipoSP")
-    public String tipoSP;
+    public String TipoSP;
 
     private Licencia_Pago(){
 
     }
 
     public Licencia_Pago(String nombreSP, String versionSP,String tipoSP){
-        this.versionSP = versionSP;
-        this.nombreSP = nombreSP;
-        this.tipoSP = tipoSP;
+        this.VersionSP = versionSP;
+        this.NombreSP = nombreSP;
+        this.TipoSP = tipoSP;
     }
 
     public String getTipoSP() {
-        return tipoSP;
+        return TipoSP;
     }
 
     public void setTipoSP(String tipoSP) {
-        this.tipoSP = tipoSP;
+        this.TipoSP = tipoSP;
     }
 
     public String getVersionSP() {
-        return versionSP;
+        return VersionSP;
     }
 
     public void setVersionSP(String versionSP) {
-        this.versionSP = versionSP;
+        this.VersionSP = versionSP;
     }
 
     public String getNombreSP() {
-        return nombreSP;
+        return NombreSP;
     }
 
     public void setNombreSP(String nombreSP) {
-        this.nombreSP = nombreSP;
+        this.NombreSP = nombreSP;
     }
 }

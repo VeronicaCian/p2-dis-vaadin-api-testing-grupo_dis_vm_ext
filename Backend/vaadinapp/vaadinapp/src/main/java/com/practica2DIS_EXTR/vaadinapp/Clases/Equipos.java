@@ -10,27 +10,6 @@ public class Equipos {
     //atributos de equipos con sus respectivas llamadas a otras clases
 
     @JsonProperty("id_equipo")
-<<<<<<< HEAD
-    public int idEquipo;
-
-    @JsonProperty("Tipo")
-    public String tipo;
-
-    @JsonProperty("Marca")
-    public  String marca;
-
-    @JsonProperty("Uso")
-    public String uso;
-
-    @JsonProperty("Sistema_operativo")
-    public Sistema_Operativo sistemaoperativo;
-
-    @JsonProperty("Hardware")
-    public Hardware hardware;
-
-    @JsonProperty("Software")
-    public Software software;
-=======
     private int id_equipo;
 
     @JsonProperty("Tipo")
@@ -50,7 +29,6 @@ public class Equipos {
 
     @JsonProperty("Software")
     private Software Software;
->>>>>>> e5be2907c81630faa14e5593c722c2d0895426b8
 
     private Equipos(){
 
@@ -119,10 +97,6 @@ public class Equipos {
     }
 
     public void setIdEquipo(int idEquipo) {
-<<<<<<< HEAD
-        this.idEquipo = idEquipo;
-=======
         this.id_equipo = id_equipo;
->>>>>>> e5be2907c81630faa14e5593c722c2d0895426b8
     }
 }
