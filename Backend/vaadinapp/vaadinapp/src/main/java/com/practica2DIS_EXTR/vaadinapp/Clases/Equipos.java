@@ -10,93 +10,93 @@ public class Equipos {
     //atributos de equipos con sus respectivas llamadas a otras clases
 
     @JsonProperty("id_equipo")
-    private int idEquipo;
+    private int id_equipo;
 
     @JsonProperty("Tipo")
-    private String tipo;
+    private String Tipo;
 
     @JsonProperty("Marca")
-    private  String marca;
+    private  String Marca;
 
     @JsonProperty("Uso")
-    private String uso;
+    private String Uso;
 
     @JsonProperty("Sistema_operativo")
-    private Sistema_Operativo sistemaoperativo;
+    private Sistema_Operativo Sistema_operativo;
 
     @JsonProperty("Hardware")
-    private Hardware hardware;
+    private Hardware Hardware;
 
     @JsonProperty("Software")
-    private Software software;
+    private Software Software;
 
     private Equipos(){
 
     }
 
-    public Equipos(int idEquipo,String tipo, String marca, String uso, Sistema_Operativo sistemaoperativo, Hardware hardware, Software software){
-        this.idEquipo = idEquipo;
-        this.tipo = tipo;
-        this.marca = marca;
-        this.sistemaoperativo = sistemaoperativo;
-        this.hardware = hardware;
-        this.software = software;
-        this.uso = uso;
+    public Equipos(int id_equipo,String Tipo, String Marca, String Uso, Sistema_Operativo Sistema_operativo, Hardware Hardware, Software Software){
+        this.id_equipo = id_equipo;
+        this.Tipo = Tipo;
+        this.Marca = Marca;
+        this.Sistema_operativo = Sistema_operativo;
+        this.Hardware = Hardware;
+        this.Software = Software;
+        this.Uso = Uso;
     }
 
     public Software getSoftware() {
-        return software;
+        return Software;
     }
 
     public void setSoftware(Software software) {
-        this.software = software;
+        this.Software = Software;
     }
 
     public Hardware getHardware() {
-        return hardware;
+        return Hardware;
     }
 
     public void setHardware(Hardware hardware) {
-        this.hardware = hardware;
+        this.Hardware = hardware;
     }
 
-    public Sistema_Operativo getSistemaoperativo() {
-        return sistemaoperativo;
+    public Sistema_Operativo getSistema_operativo() {
+        return Sistema_operativo;
     }
 
     public void setSistemaoperativo(Sistema_Operativo sistemaoperativo) {
-        this.sistemaoperativo = sistemaoperativo;
+        this.Sistema_operativo = Sistema_operativo;
     }
 
     public String getUso() {
-        return uso;
+        return Uso;
     }
 
     public void setUso(String uso) {
-        this.uso = uso;
+        this.Uso = Uso;
     }
 
     public String getMarca() {
-        return marca;
+        return Marca;
     }
 
     public void setMarca(String marca) {
-        this.marca = marca;
+        this.Marca = marca;
     }
 
     public String getTipo() {
-        return tipo;
+        return Tipo;
     }
 
     public void setTipo(String tipo) {
-        this.tipo = tipo;
+        this.Tipo = tipo;
     }
 
     public int getIdEquipo() {
-        return idEquipo;
+        return id_equipo;
     }
 
     public void setIdEquipo(int idEquipo) {
-        this.idEquipo = idEquipo;
+        this.id_equipo = id_equipo;
     }
 }
