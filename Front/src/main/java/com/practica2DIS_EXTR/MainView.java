@@ -36,8 +36,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class MainView extends VerticalLayout {
 
 
-    private static final String API = "http://api:9090/%s";
-
+    private static final String URL = "http://localhost:8080/api/%s";
 
 
 
