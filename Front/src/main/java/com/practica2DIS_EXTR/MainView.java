@@ -168,6 +168,24 @@ public class MainView extends VerticalLayout {
         PrestamoGrid.addColumn(Prestamos::getFecha_Fin_Prestamo);
         PrestamoGrid.addColumn(Prestamos::getComentarios);
 
+        //al pulsar el boton de nuevo usuario
+        btnNewPrestamo.addClickListener( e ->{
+            Dialog dialog = new Dialog();
+            VerticalLayout dialogLayout = createDialogPrestamoLayout();
+            dialog.add(dialogLayout);
+
+            Button cancelButton = new Button("Cancel", e1 -> dialog.close());
+            dialog.add(cancelButton);
+
+
+            dialog.open();
+
+            // Center the button within the example
+            getStyle().set("position", "fixed").set("top", "0").set("right", "0")
+                    .set("bottom", "0").set("left", "0").set("display", "flex")
+                    .set("align-items", "center").set("justify-content", "center");
+        });
+
         //Fin del grid Prestamos
 
         VerticalPrestamoLayout.add(PrestamoGrid,btnNewPrestamo);
@@ -242,6 +260,25 @@ public class MainView extends VerticalLayout {
 
         VerticalLayout dialogLayout = new VerticalLayout(
                 nombre,departamento,telefono, email, ubicacion);
+        dialogLayout.setPadding(false);
+        dialogLayout.setSpacing(false);
+        dialogLayout.setAlignItems(FlexComponent.Alignment.STRETCH);
+        dialogLayout.getStyle().set("width", "18rem").set("max-width", "100%");
+
+        return dialogLayout;
+    }
+
+    private static VerticalLayout createDialogPrestamoLayout() {
+
+        //Definicion de los textfield
+        AtomicInteger id_prestamo = new AtomicInteger();
+        TextField usuario = new TextField("Usuario_Id");
+        TextField fechaIni = new TextField("Fecha Inicio");
+        TextField fechaFin = new TextField("Fecha fin ");
+        TextField comentarios = new TextField("Comentarios");
+
+        VerticalLayout dialogLayout = new VerticalLayout(
+                usuario,fechaIni,fechaFin, comentarios);
         dialogLayout.setPadding(false);
         dialogLayout.setSpacing(false);
         dialogLayout.setAlignItems(FlexComponent.Alignment.STRETCH);
