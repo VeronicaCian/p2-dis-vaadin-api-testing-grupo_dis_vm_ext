@@ -7,6 +7,7 @@ import com.practica2DIS_EXTR.Clases.Equipos;
 import com.practica2DIS_EXTR.Clases.Prestamos;
 import com.practica2DIS_EXTR.Clases.Usuarios;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
@@ -77,6 +78,36 @@ public class MainView extends VerticalLayout {
 
     }
 
+
+    public final String crearUser(Usuarios newUser){
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String string = gson.toJson(newUser, Usuarios.class);
+        String resource = String.format(URL, "usuario");
+        System.out.println(resource);
+
+
+        try{
+            request = HttpRequest.newBuilder(new URI(resource)).header("Content-type","application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(string)).build();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+
+        try{
+            response = cliente.send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(response.body());
+
+        return response.body();
+
+    }
+
+
     //metodo para trar desde el backend los prestamos
     private String GetPrestamos(){
         String resource = String.format(URL, "prestamos");
@@ -146,9 +177,16 @@ public class MainView extends VerticalLayout {
         pestañaUser = new Tab(VaadinIcon.USER.create(),new Span("Usuarios"));
         Div divUsers = new Div();
 
+        AtomicInteger id_user = new AtomicInteger();
+        TextField nombre = new TextField("Nombre");
+        TextField departamento = new TextField("Departamento");
+        TextField telefono = new TextField("Telefono");
+        TextField email = new TextField("Email");
+        TextField ubicacion = new TextField("Ubicación");
+
         //nos creamos el boton de añadir un nuevo usuario
         Button btnNewUser = new Button("Nuevo User");
-
+        Button btnAgregarUser = new Button("Añadir");
 
         //Inicio grid Usuarios
 
@@ -174,7 +212,7 @@ public class MainView extends VerticalLayout {
             Button cancelButton = new Button("Cancel", e1 -> dialog.close());
             dialog.add(cancelButton);
 
-
+            
             dialog.open();
 
             // Center the button within the example
@@ -182,6 +220,8 @@ public class MainView extends VerticalLayout {
                     .set("bottom", "0").set("left", "0").set("display", "flex")
                     .set("align-items", "center").set("justify-content", "center");
         });
+
+
 
         //fin grid Usuarios
 
@@ -251,6 +291,14 @@ public class MainView extends VerticalLayout {
         //nos creamos el boton de añadir un nuevo prestamo
         Button btnNewPrestamo = new Button("Nuevo Prestamo");
 
+
+        TextField usuario = new TextField("Usuario_Id");
+        TextField equipo = new TextField("Equipo id");
+        TextField fechaIni = new TextField("Fecha Inicio");
+        TextField fechaFin = new TextField("Fecha fin ");
+        TextField comentarios = new TextField("Comentarios");
+
+
         //Incicio de grid Prestamos
 
         Grid<Prestamos> PrestamoGrid = new Grid<>(Prestamos.class);
@@ -279,6 +327,10 @@ public class MainView extends VerticalLayout {
                     .set("bottom", "0").set("left", "0").set("display", "flex")
                     .set("align-items", "center").set("justify-content", "center");
         });
+
+
+
+
 
         //Fin del grid Prestamos
 
@@ -344,6 +396,8 @@ public class MainView extends VerticalLayout {
 
     private static VerticalLayout createDialogUserLayout() {
 
+        Button btnAgregarUser = new Button("Añadir");
+
         //Definicion de los textfield
         AtomicInteger id_user = new AtomicInteger();
         TextField nombre = new TextField("Nombre");
@@ -358,6 +412,7 @@ public class MainView extends VerticalLayout {
         dialogLayout.setSpacing(false);
         dialogLayout.setAlignItems(FlexComponent.Alignment.STRETCH);
         dialogLayout.getStyle().set("width", "18rem").set("max-width", "100%");
+
 
         return dialogLayout;
     }

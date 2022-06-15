@@ -3,13 +3,15 @@ package com.practica2DIS_EXTR.Clases;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE)
 public class Usuarios {
 
 
     //atributos
     @JsonProperty("id")
-    private int id;
+    private AtomicInteger id;
 
     @JsonProperty("Nombre")
     private String Nombre;
@@ -30,7 +32,8 @@ public class Usuarios {
 
     }
 
-    public Usuarios(int id, String Nombre, String Departamento, String Ubicacion, int telefono, String email){
+
+    public Usuarios(AtomicInteger id_user, String value, String value1, String value2, String value3, String value4) {
         this.id = id;
         this.email = email;
         this.Departamento = Departamento;
@@ -80,11 +83,11 @@ public class Usuarios {
         Nombre = nombre;
     }
 
-    public int getId() {
+    public AtomicInteger getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(AtomicInteger id) {
         this.id = id;
     }
 
