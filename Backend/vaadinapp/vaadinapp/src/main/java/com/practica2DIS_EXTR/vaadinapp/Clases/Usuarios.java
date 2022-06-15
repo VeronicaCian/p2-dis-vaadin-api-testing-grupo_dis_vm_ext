@@ -20,10 +20,10 @@ public class Usuarios {
     @JsonProperty("Ubicacion")
     private String Ubicacion;
 
-    @JsonProperty("Telefono de contacto")
+    @JsonProperty("telefono")
     private int telefono;
 
-    @JsonProperty("Correo electronico")
+    @JsonProperty("email")
     private String email;
 
     private Usuarios(){
@@ -32,11 +32,11 @@ public class Usuarios {
 
     public Usuarios(int id, String Nombre, String Departamento, String Ubicacion, int telefono, String email){
         this.id = id;
-        this.email = email;
-        this.Departamento = Departamento;
         this.Nombre = Nombre;
-        this.telefono = telefono;
+        this.Departamento = Departamento;
         this.Ubicacion = Ubicacion;
+        this.telefono = telefono;
+        this.email = email;
     }
 
 

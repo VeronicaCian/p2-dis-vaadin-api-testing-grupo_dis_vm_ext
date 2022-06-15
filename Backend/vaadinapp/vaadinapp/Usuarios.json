@@ -4,13 +4,15 @@
     "Nombre": "Miguel",
     "Departamento": "Informatica",
     "Ubicacion": "Madrid",
-    "telefono": 0
+    "telefono": 603404703,
+    "email":"salasrmcf1997@gmail.com"
   },
   {
     "id": 1,
     "Nombre": "Pablo",
     "Departamento": "Contabilidad",
     "Ubicacion": "Pozuelo",
-    "telefono": 0
+    "telefono": 638424986,
+    "email":"pabloufv@gmail.com"
   }
 ]

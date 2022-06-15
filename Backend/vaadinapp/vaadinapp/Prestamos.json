@@ -5,7 +5,7 @@
     "Fecha_Inicio_Prestamo": "15/11/96",
     "Fecha_Fin_Prestamo": "15/11/97",
     "Fecha_Real_Dev": "15/11/97",
-    "Comentarios": ""
+    "Comentarios": "yyyy"
   },
   {
     "id": 1,
@@ -13,14 +13,15 @@
     "Fecha_Inicio_Prestamo": "24/11/97",
     "Fecha_Fin_Prestamo": "15/11/97",
     "Fecha_Real_Dev": "16/11/97",
-    "Comentarios": ""
+    "Comentarios": "xxx"
   },
   {
     "id": 2,
     "Usuario_Id": 7,
     "Fecha_Inicio_Prestamo": "24/01/97",
     "Fecha_Fin_Prestamo": "27/02/98",
-    "Fecha_Real_Dev": "27/02/98"
+    "Fecha_Real_Dev": "27/02/98",
+    "Comentarios": "xxx"
   },
   {
     "id": 0,
@@ -28,7 +29,7 @@
     "Fecha_Inicio_Prestamo": "15/11/96",
     "Fecha_Fin_Prestamo": "15/11/97",
     "Fecha_Real_Dev": "15/12/97",
-    "Comentarios": ""
+    "Comentarios": "gggg"
   },
   {
     "id": 1,
@@ -36,13 +37,14 @@
     "Fecha_Inicio_Prestamo": "15/11/96",
     "Fecha_Fin_Prestamo": "23/09/2001",
     "Fecha_Real_Dev": "15/12/97",
-    "Comentarios": ""
+    "Comentarios": "uuuu"
   },
   {
     "id": 0,
     "Usuario_Id": 7,
     "Fecha_Inicio_Prestamo": "24/01/97",
     "Fecha_Fin_Prestamo": "27/02/98",
-    "Fecha_Real_Dev": "27/02/98"
+    "Fecha_Real_Dev": "27/02/98",
+    "Comentarios": "xxx"
   }
 ]
