@@ -7,6 +7,8 @@ import com.practica2DIS_EXTR.Clases.Equipos;
 import com.practica2DIS_EXTR.Clases.Prestamos;
 import com.practica2DIS_EXTR.Clases.Usuarios;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.Html;
+import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -14,6 +16,7 @@ import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Pre;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -22,6 +25,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
+import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.router.Route;
@@ -48,6 +52,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class MainView extends VerticalLayout {
 
     private static final String URL = "http://localhost:8081/api/%s";
+    //private static HttpRequest request;
     HttpRequest request;
     HttpClient cliente = HttpClient.newBuilder().build();
     HttpResponse<String> response;
@@ -79,7 +84,7 @@ public class MainView extends VerticalLayout {
     }
 
 
-    public final String crearUser(Usuarios newUser){
+    public  String crearUser(Usuarios newUser){
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String string = gson.toJson(newUser, Usuarios.class);
         String resource = String.format(URL, "usuario");
@@ -135,6 +140,54 @@ public class MainView extends VerticalLayout {
     }
 
 
+
+    private VerticalLayout createDialogUserLayout(Dialog dialog) {
+
+        H2 headline = new H2("Nuevo usuario");
+        headline.getStyle().set("margin", "0").set("font-size", "1.5em")
+                .set("font-weight", "bold");
+
+        HorizontalLayout header = new HorizontalLayout(headline);
+        header.getElement().getClassList().add("draggable");
+        header.setSpacing(false);
+
+        //Definicion de los textfield del formulario
+        AtomicInteger id_user = new AtomicInteger();
+        TextField Nombre = new TextField("Nombre");
+        TextField Departamento = new TextField("Departamento");
+        TextField telefono = new TextField("Telefono");
+        TextField email = new TextField("Email");
+        TextField Ubicacion = new TextField("Ubicación");
+
+        VerticalLayout dialogLayout = new VerticalLayout(Nombre,Departamento,Ubicacion, telefono, email);
+        dialogLayout.setPadding(false);
+        dialogLayout.setSpacing(false);
+        dialogLayout.setAlignItems(FlexComponent.Alignment.STRETCH);
+        dialogLayout.getStyle().set("width", "18rem").set("max-width", "100%");
+
+        //botones del formulario
+        //utton btnAgregarUser = new Button("Añadir", e-> dialog.close());
+        Button btnAñadir = new Button("Añadir" ,e -> {
+            //agregamos la funcioalidad de agregar el usuarios con los datos del textfield
+            //instanciamos un nuevo usuario
+            Usuarios user = new Usuarios(id_user,Nombre.getValue(),Departamento.getValue(),Ubicacion.getValue(),telefono.getValue(),email.getValue());
+            //MainView m = new MainView();
+            crearUser(user);
+            UI.getCurrent().getPage().reload();
+
+
+
+        });
+
+        HorizontalLayout buttonLayout = new HorizontalLayout(btnAñadir);
+        VerticalLayout dialogLayout2 = new VerticalLayout(header, dialogLayout,buttonLayout);
+        dialog.add(btnAñadir);
+
+        return dialogLayout;
+    }
+
+
+
     //declaramos las variables final para el proyecto
     final VerticalLayout layout;
     final Tab pestañaUser;
@@ -177,12 +230,7 @@ public class MainView extends VerticalLayout {
         pestañaUser = new Tab(VaadinIcon.USER.create(),new Span("Usuarios"));
         Div divUsers = new Div();
 
-        AtomicInteger id_user = new AtomicInteger();
-        TextField nombre = new TextField("Nombre");
-        TextField departamento = new TextField("Departamento");
-        TextField telefono = new TextField("Telefono");
-        TextField email = new TextField("Email");
-        TextField ubicacion = new TextField("Ubicación");
+
 
         //nos creamos el boton de añadir un nuevo usuario
         Button btnNewUser = new Button("Nuevo User");
@@ -206,11 +254,12 @@ public class MainView extends VerticalLayout {
         //al pulsar el boton de nuevo usuario
         btnNewUser.addClickListener( e ->{
             Dialog dialog = new Dialog();
-            VerticalLayout dialogLayout = createDialogUserLayout();
+            VerticalLayout dialogLayout = createDialogUserLayout(dialog);
             dialog.add(dialogLayout);
 
-            Button cancelButton = new Button("Cancel", e1 -> dialog.close());
+            Button cancelButton = new Button("Cancelar", e1 -> dialog.close());
             dialog.add(cancelButton);
+            //add(dialog,cancelButton);
 
             
             dialog.open();
@@ -310,6 +359,12 @@ public class MainView extends VerticalLayout {
         PrestamoGrid.addColumn(Prestamos::getFecha_Fin_Prestamo);
         PrestamoGrid.addColumn(Prestamos::getComentarios);
 
+        //listener para cuando el usuario selecciones una fila
+        UsersGrid.asSingleSelect().addValueChangeListener(e -> {
+            modalinfo(e.getValue());
+        });
+
+
         //al pulsar el boton de nuevo usuario
         btnNewPrestamo.addClickListener( e ->{
             Dialog dialog2 = new Dialog();
@@ -394,28 +449,6 @@ public class MainView extends VerticalLayout {
         }
     }
 
-    private static VerticalLayout createDialogUserLayout() {
-
-        Button btnAgregarUser = new Button("Añadir");
-
-        //Definicion de los textfield
-        AtomicInteger id_user = new AtomicInteger();
-        TextField nombre = new TextField("Nombre");
-        TextField departamento = new TextField("Departamento");
-        TextField telefono = new TextField("Telefono");
-        TextField email = new TextField("Email");
-        TextField ubicacion = new TextField("Ubicación");
-
-        VerticalLayout dialogLayout = new VerticalLayout(
-                nombre,departamento,telefono, email, ubicacion);
-        dialogLayout.setPadding(false);
-        dialogLayout.setSpacing(false);
-        dialogLayout.setAlignItems(FlexComponent.Alignment.STRETCH);
-        dialogLayout.getStyle().set("width", "18rem").set("max-width", "100%");
-
-
-        return dialogLayout;
-    }
 
     private static VerticalLayout createDialogPrestamoLayout() {
 
@@ -455,7 +488,89 @@ public class MainView extends VerticalLayout {
     }
 
 
+    //Funcion modalinfo para mostrar la informacion del usuario
+    private void modalinfo(Usuarios user){
+        try {
+            Dialog dialog = new Dialog(); //nos instanciamos un nuevo dialogo
+            dialog.setCloseOnEsc(false);
+            dialog.setCloseOnOutsideClick(false);
 
+            //ponemos en el layout los campos a mostrar
+            dialog.add(new HorizontalLayout(new Html("<b>Nombre:  </b>"),new Text(user.getNombre())));
+            dialog.add(new HorizontalLayout(new Html("<b>Departamento:  </b>"), new Text(user.getDepartamento())));
+            dialog.add(new HorizontalLayout(new Html("<b>Ubicacion:  </b>"),new Text(user.getUbicacion())));
+            dialog.add(new HorizontalLayout(new Html("<b>Telefono:  </b>"), new Text(String.valueOf(user.getTelefono()))));
+            dialog.add(new HorizontalLayout(new Html("<b>email:  </b>"),new Text(user.getEmail())));
+
+            Button modificaruser = new Button("Editar", event -> {dialog.close(); editarmodaluser(user);});
+            Button deleteuser = new Button("Eliminar");
+            Button cancelButton = new Button("Cancelar", event -> { dialog.close(); });
+            HorizontalLayout actions2 = new HorizontalLayout(modificaruser, cancelButton,deleteuser);
+            dialog.add(actions2);
+            dialog.open();
+
+            //estilo para el boton de eliminar --> rojo
+            deleteuser.addThemeVariants(ButtonVariant.LUMO_PRIMARY,ButtonVariant.LUMO_ERROR);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    //MOdal para modificar un usuario
+    private void editarmodaluser(Usuarios user){
+
+        Dialog dialog = new Dialog(); //nos creamos un nuevo dialog para el formulario de mdificar el usuario
+        dialog.setCloseOnOutsideClick(false);
+        dialog.setCloseOnEsc(false);
+
+        //Declaramos los campos que van a aparecer para editar el modal
+        //lo campos son los declrados anteriormente
+        //usamos TextField
+
+        TextField Nombre = new TextField("Nombre");
+        Nombre.setValue(user.getNombre());
+        dialog.add(new HorizontalLayout(Nombre));
+        TextField Departamento = new TextField("Departamento");
+        Departamento.setValue(user.getDepartamento());
+        dialog.add(new HorizontalLayout(Departamento));
+        TextField Ubicacion = new TextField("Ubicacion");
+        Ubicacion.setValue(user.getUbicacion());
+        dialog.add(new HorizontalLayout(Ubicacion));
+        TextField telefono = new TextField("Telefono");
+        telefono.setValue(String.valueOf(user.getTelefono()));
+        dialog.add(new HorizontalLayout(telefono));
+        TextField email = new TextField("email");
+        email.setValue(user.getEmail());
+        dialog.add(new HorizontalLayout(email));
+
+
+        //creamos el boton de aceptar para modificar el usuario
+
+        Button aceptar = new Button("Confirmar", e -> {
+
+            user.setNombre(Nombre.getValue());
+            user.setDepartamento(Departamento.getValue());
+            user.setUbicacion(Ubicacion.getValue());
+            user.setTelefono(Integer.parseInt(telefono.getValue()));
+            user.setEmail(email.getValue());
+
+            //guardamos los cambios
+            //LLAMADA A FUNCION DE PUT como modificaUser(user)
+            dialog.close();
+
+        });
+
+        //cremoa un boton de abortar o cancelar y los añadirmos al layout
+        Button cancelar = new Button("Cancelar", event -> { dialog.close(); });
+        HorizontalLayout opt = new HorizontalLayout(aceptar, cancelar);
+        dialog.add(opt);
+        //abrimos el modal
+        dialog.open();
+
+    }
 
 
 

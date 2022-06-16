@@ -5,7 +5,7 @@
     "Departamento": "Informatica",
     "Ubicacion": "Madrid",
     "telefono": 603404703,
-    "email":"salasrmcf1997@gmail.com"
+    "email": "salasrmcf1997@gmail.com"
   },
   {
     "id": 1,
@@ -13,6 +13,34 @@
     "Departamento": "Contabilidad",
     "Ubicacion": "Pozuelo",
     "telefono": 638424986,
-    "email":"pabloufv@gmail.com"
+    "email": "pabloufv@gmail.com"
+  },
+  {
+    "id": 0,
+    "telefono": 0
+  },
+  {
+    "id": 1,
+    "telefono": 0
+  },
+  {
+    "id": 2,
+    "Nombre": "Lucia",
+    "Departamento": "Publicidad",
+    "Ubicacion": "Pozuelo",
+    "telefono": 638054986,
+    "email": "luciaufv@gmail.com"
+  },
+  {
+    "id": 3,
+    "telefono": 0
+  },
+  {
+    "id": 4,
+    "telefono": 0
+  },
+  {
+    "id": 5,
+    "telefono": 0
   }
 ]
