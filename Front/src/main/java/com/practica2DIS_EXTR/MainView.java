@@ -27,8 +27,10 @@ import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.router.Route;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -52,6 +54,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class MainView extends VerticalLayout {
 
     private static final String URL = "http://localhost:8081/api/%s";
+    private static final String URL2 = "http://localhost:8081/api/%s/%s";
     //private static HttpRequest request;
     HttpRequest request;
     HttpClient cliente = HttpClient.newBuilder().build();
@@ -82,6 +85,39 @@ public class MainView extends VerticalLayout {
         return response.body();
 
     }
+
+
+
+
+    //metodo para trar desde el backend los usuarios
+    private String Getuser(String name){
+        String resource = String.format(URL2, "usuarios/{nombre}");
+        System.out.println(resource);
+
+        try{
+            request = HttpRequest.newBuilder(new URI(resource)).header("Content-type","application/java")
+                    .GET().build();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+
+        try{
+            response = cliente.send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(response.body());
+
+        return response.body();
+
+    }
+
+
+
+
 
 
     public  String crearUser(Usuarios newUser){
@@ -141,50 +177,6 @@ public class MainView extends VerticalLayout {
 
 
 
-    private VerticalLayout createDialogUserLayout(Dialog dialog) {
-
-        H2 headline = new H2("Nuevo usuario");
-        headline.getStyle().set("margin", "0").set("font-size", "1.5em")
-                .set("font-weight", "bold");
-
-        HorizontalLayout header = new HorizontalLayout(headline);
-        header.getElement().getClassList().add("draggable");
-        header.setSpacing(false);
-
-        //Definicion de los textfield del formulario
-        AtomicInteger id_user = new AtomicInteger();
-        TextField Nombre = new TextField("Nombre");
-        TextField Departamento = new TextField("Departamento");
-        TextField telefono = new TextField("Telefono");
-        TextField email = new TextField("Email");
-        TextField Ubicacion = new TextField("Ubicación");
-
-        VerticalLayout dialogLayout = new VerticalLayout(Nombre,Departamento,Ubicacion, telefono, email);
-        dialogLayout.setPadding(false);
-        dialogLayout.setSpacing(false);
-        dialogLayout.setAlignItems(FlexComponent.Alignment.STRETCH);
-        dialogLayout.getStyle().set("width", "18rem").set("max-width", "100%");
-
-        //botones del formulario
-        //utton btnAgregarUser = new Button("Añadir", e-> dialog.close());
-        Button btnAñadir = new Button("Añadir" ,e -> {
-            //agregamos la funcioalidad de agregar el usuarios con los datos del textfield
-            //instanciamos un nuevo usuario
-            Usuarios user = new Usuarios(id_user,Nombre.getValue(),Departamento.getValue(),Ubicacion.getValue(),telefono.getValue(),email.getValue());
-            //MainView m = new MainView();
-            crearUser(user);
-            UI.getCurrent().getPage().reload();
-
-
-
-        });
-
-        HorizontalLayout buttonLayout = new HorizontalLayout(btnAñadir);
-        VerticalLayout dialogLayout2 = new VerticalLayout(header, dialogLayout,buttonLayout);
-        dialog.add(btnAñadir);
-
-        return dialogLayout;
-    }
 
 
 
@@ -195,12 +187,13 @@ public class MainView extends VerticalLayout {
     final Tab pestañaEquipo;
     final Map<Tab, Component> tabsToPages = new HashMap<>();
     final Tabs tabs;
+    final TextField filtros;
 
 
     public MainView() {
 
 
-
+        this.filtros = new TextField();
         //objetos inciales
         //Inicializamos una llamada para coger los prestamos y meterlos en un array
         VerticalLayout totalayout = new VerticalLayout();
@@ -251,6 +244,12 @@ public class MainView extends VerticalLayout {
 
         UsersGrid.setWidth("100%");
 
+        //listener para cuando el usuario selecciones una fila del grid
+        UsersGrid.asSingleSelect().addValueChangeListener(e -> {
+            modalinfo(e.getValue());
+        });
+
+
         //al pulsar el boton de nuevo usuario
         btnNewUser.addClickListener( e ->{
             Dialog dialog = new Dialog();
@@ -275,11 +274,24 @@ public class MainView extends VerticalLayout {
         //fin grid Usuarios
 
         HorizontalUsersLayout.add(btnNewUser);
-        VerticalUsersLayout.add(UsersGrid, HorizontalUsersLayout);
+        VerticalUsersLayout.add(filtros,UsersGrid, HorizontalUsersLayout);
         divUsers.add(VerticalUsersLayout);
         divUsers.getStyle().set("flex-wrap", "wrap");
 
 
+        //filtros para buscar
+        filtros.setValueChangeMode(ValueChangeMode.EAGER);
+        filtros.addValueChangeListener(e ->{
+
+           String user=  Getuser(e.getValue());
+           Usuarios userfiltro = gson2.fromJson(usuariosarray, listausers);
+           if(userfiltro != null){
+               UsersGrid.setItems(userfiltro);
+           }else{
+               UsersGrid.setItems(users);
+           }
+
+        });
         //FIN LAYOUT USUARIOS
 
 
@@ -359,9 +371,9 @@ public class MainView extends VerticalLayout {
         PrestamoGrid.addColumn(Prestamos::getFecha_Fin_Prestamo);
         PrestamoGrid.addColumn(Prestamos::getComentarios);
 
-        //listener para cuando el usuario selecciones una fila
-        UsersGrid.asSingleSelect().addValueChangeListener(e -> {
-            modalinfo(e.getValue());
+        //listener para cuando el usuario selecciones una fila del grid
+        PrestamoGrid.asSingleSelect().addValueChangeListener(e -> {
+            modalinfoPrestamo(e.getValue());
         });
 
 
@@ -427,6 +439,58 @@ public class MainView extends VerticalLayout {
         //FIN TABSHEET
 
     }
+    //FIN CONTSTRUCTOR DE MAINVIEW
+
+
+
+    private VerticalLayout createDialogUserLayout(Dialog dialog) {
+
+        H2 headline = new H2("Nuevo usuario");
+        headline.getStyle().set("margin", "0").set("font-size", "1.5em")
+                .set("font-weight", "bold");
+
+        HorizontalLayout header = new HorizontalLayout(headline);
+        header.getElement().getClassList().add("draggable");
+        header.setSpacing(false);
+
+        //Definicion de los textfield del formulario
+        AtomicInteger id_user = new AtomicInteger();
+        TextField Nombre = new TextField("Nombre");
+        TextField Departamento = new TextField("Departamento");
+        TextField telefono = new TextField("Telefono");
+        TextField email = new TextField("Email");
+        TextField Ubicacion = new TextField("Ubicación");
+
+        VerticalLayout dialogLayout = new VerticalLayout(Nombre,Departamento,Ubicacion, telefono, email);
+        dialogLayout.setPadding(false);
+        dialogLayout.setSpacing(false);
+        dialogLayout.setAlignItems(FlexComponent.Alignment.STRETCH);
+        dialogLayout.getStyle().set("width", "18rem").set("max-width", "100%");
+
+        //botones del formulario
+        //utton btnAgregarUser = new Button("Añadir", e-> dialog.close());
+        Button btnAñadir = new Button("Añadir" ,e -> {
+            //agregamos la funcioalidad de agregar el usuarios con los datos del textfield
+            //instanciamos un nuevo usuario
+            Usuarios user = new Usuarios(id_user,Nombre.getValue(),Departamento.getValue(),Ubicacion.getValue(),telefono.getValue(),email.getValue());
+            //MainView m = new MainView();
+            crearUser(user);
+            UI.getCurrent().getPage().reload();
+
+
+
+        });
+
+        HorizontalLayout buttonLayout = new HorizontalLayout(btnAñadir);
+        VerticalLayout dialogLayout2 = new VerticalLayout(header, dialogLayout,buttonLayout);
+        dialog.add(btnAñadir);
+
+        return dialogLayout;
+    }
+
+
+
+
 
 
     //Inicio de los metodos
@@ -571,6 +635,100 @@ public class MainView extends VerticalLayout {
         dialog.open();
 
     }
+
+
+
+    //METODOS PARA LA PESTAÑA DE PRESTAMOS
+
+    //modal iinformacion cuando el usuario quiere ver info de un prestamos
+    private void modalinfoPrestamo(Prestamos prestamo){
+
+        try{
+            //nos generemos un nuevo dialogo
+            Dialog dialogo = new Dialog();
+            dialogo.setCloseOnEsc(false);
+            dialogo.setCloseOnOutsideClick(false);
+
+            //ponemos en el layout los textfields que vamos a usar
+            dialogo.add(new HorizontalLayout(new Html("<b>id Usuario: </b>"), new Text(String.valueOf(prestamo.getUsuario_Id()))));
+            dialogo.add(new HorizontalLayout(new Html("<b>id Equipo: </b>"), new Text(String.valueOf(prestamo.getEquipo_Id()))));
+            dialogo.add(new HorizontalLayout(new Html("<b>Fecha Inicio Prestamo: </b>"),new Text(prestamo.getFecha_Inicio_Prestamo())));
+            dialogo.add(new HorizontalLayout(new Html("<b>Fecha Fin prestamos: </b>"),new Text(prestamo.getFecha_Fin_Prestamo())));
+            dialogo.add(new HorizontalLayout(new Html("<b>Fecha Real dev: </b>"),new Text(prestamo.getFecha_Real_Dev())));
+            dialogo.add(new HorizontalLayout(new Html("<b>Comentarios: </b>"),new Text(prestamo.getComentarios())));
+
+            Button modificarprestamo = new Button("Editar", event -> {dialogo.close(); editarmodalPrestamo(prestamo);});
+            Button deleteprestamo = new Button("Eliminar");
+            Button cancelButton = new Button("Cancelar", event -> { dialogo.close(); });
+            HorizontalLayout actions2 = new HorizontalLayout(modificarprestamo, cancelButton,deleteprestamo);
+            dialogo.add(actions2);
+            dialogo.open();
+
+            //estilo para el boton de eliminar --> rojo
+            deleteprestamo.addThemeVariants(ButtonVariant.LUMO_PRIMARY,ButtonVariant.LUMO_ERROR);
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    //metodo para editar un prestamos
+    //fomrulario con textfields donde se muestra la info del prestamo solicitado
+    private void editarmodalPrestamo(Prestamos prestamo){
+
+        //nos generemos un nuevo dialogo
+        Dialog dialogo = new Dialog();
+        dialogo.setCloseOnEsc(false);
+        dialogo.setCloseOnOutsideClick(false);
+
+        //textfields necesarios
+        TextField idUsuario = new TextField("Id Usuario");
+        idUsuario.setValue(String.valueOf(prestamo.getUsuario_Id()));
+        dialogo.add(new HorizontalLayout(idUsuario));
+        TextField idEquipo = new TextField("Id Equipo");
+        idEquipo.setValue(String.valueOf(prestamo.getEquipo_Id()));
+        dialogo.add(new HorizontalLayout(idEquipo));
+        TextField fechaIni = new TextField("Fecha Inicio prestamo");
+        fechaIni.setValue(prestamo.getFecha_Inicio_Prestamo());
+        dialogo.add(new HorizontalLayout(fechaIni));
+        TextField fechaFin = new TextField("Fecha Fin prestamo");
+        fechaFin.setValue(prestamo.getFecha_Fin_Prestamo());
+        dialogo.add(new HorizontalLayout(fechaFin));
+        TextField fechaReal = new TextField("Fecha Real prestamo");
+        fechaReal.setValue(prestamo.getFecha_Real_Dev());
+        dialogo.add(new HorizontalLayout(fechaReal));
+        TextField comentaios = new TextField("Comentarios");
+        comentaios.setValue(prestamo.getComentarios());
+        dialogo.add(new HorizontalLayout(comentaios));
+
+        Button aceptar = new Button("Confirmar", e -> {
+
+            prestamo.setUsuario_Id(Integer.parseInt(idUsuario.getValue()));
+            prestamo.setEquipo_Id(Integer.parseInt(idEquipo.getValue()));
+            prestamo.setFecha_Inicio_Prestamo(fechaIni.getValue());
+            prestamo.setFecha_Fin_Prestamo(fechaFin.getValue());
+            prestamo.setFecha_Real_Dev(fechaReal.getValue());
+            prestamo.setComentarios(comentaios.getValue());
+
+            //guardamos los cambios
+            //LLAMADA A FUNCION DE PUT como modificaUser(user)
+            dialogo.close();
+
+        });
+
+        //cremoa un boton de abortar o cancelar y los añadirmos al layout
+        Button cancelar = new Button("Cancelar", event -> { dialogo.close(); });
+        HorizontalLayout opt = new HorizontalLayout(aceptar, cancelar);
+        dialogo.add(opt);
+        //abrimos el modal
+        dialogo.open();
+
+
+    }
+
 
 
 

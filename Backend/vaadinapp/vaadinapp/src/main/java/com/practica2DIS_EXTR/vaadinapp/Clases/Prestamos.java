@@ -13,6 +13,9 @@ public class Prestamos {
     @JsonProperty("Usuario_Id")
     private int Usuario_Id;
 
+    @JsonProperty("Equipo_Id")
+    private int Equipo_Id;
+
     @JsonProperty("Fecha_Inicio_Prestamo")
     private String Fecha_Inicio_Prestamo;
 
@@ -29,13 +32,22 @@ public class Prestamos {
     private Prestamos(){
 
     }
-    public Prestamos(int id, int Usuario_Id, String Fecha_Inicio_Prestamo, String Fecha_Fin_Prestamo, String Fecha_Real_Dev, String Comentarios) {
+    public Prestamos(int id, int Usuario_Id, int Equipo_Id,String Fecha_Inicio_Prestamo, String Fecha_Fin_Prestamo, String Fecha_Real_Dev, String Comentarios) {
         this.id = id;
         this.Usuario_Id = Usuario_Id;
         this.Fecha_Inicio_Prestamo = Fecha_Inicio_Prestamo;
         this.Fecha_Fin_Prestamo = Fecha_Fin_Prestamo;
         this.Fecha_Real_Dev = Fecha_Real_Dev;
         this.Comentarios = Comentarios;
+        this.Equipo_Id = Equipo_Id;
+    }
+
+    public int getEquipo_Id() {
+        return Equipo_Id;
+    }
+
+    public void setEquipo_Id(int equipo_Id) {
+        Equipo_Id = equipo_Id;
     }
 
     public int getId() {
