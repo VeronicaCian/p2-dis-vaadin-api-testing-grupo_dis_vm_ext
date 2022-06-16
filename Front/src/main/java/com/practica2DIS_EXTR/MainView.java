@@ -54,7 +54,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class MainView extends VerticalLayout {
 
     private static final String URL = "http://localhost:8081/api/%s";
-    private static final String URL2 = "http://localhost:8081/api/%s/%s";
+    private static final String URL2 = "http://localhost:8081/api/%s/%i";
     //private static HttpRequest request;
     HttpRequest request;
     HttpClient cliente = HttpClient.newBuilder().build();
@@ -90,8 +90,8 @@ public class MainView extends VerticalLayout {
 
 
     //metodo para trar desde el backend los usuarios
-    private String Getuser(String name){
-        String resource = String.format(URL2, "usuarios/{nombre}");
+    private String Getuser(int id){
+        String resource = String.format(URL2, "usuarios/{id}");
         System.out.println(resource);
 
         try{
@@ -187,13 +187,13 @@ public class MainView extends VerticalLayout {
     final Tab pestañaEquipo;
     final Map<Tab, Component> tabsToPages = new HashMap<>();
     final Tabs tabs;
-    final TextField filtros;
+    final IntegerField filtros;
 
 
     public MainView() {
 
 
-        this.filtros = new TextField();
+        this.filtros = new IntegerField();
         //objetos inciales
         //Inicializamos una llamada para coger los prestamos y meterlos en un array
         VerticalLayout totalayout = new VerticalLayout();
@@ -283,7 +283,7 @@ public class MainView extends VerticalLayout {
         filtros.setValueChangeMode(ValueChangeMode.EAGER);
         filtros.addValueChangeListener(e ->{
 
-           String user=  Getuser(e.getValue());
+           String user= Getuser(e.getValue());
            Usuarios userfiltro = gson2.fromJson(usuariosarray, listausers);
            if(userfiltro != null){
                UsersGrid.setItems(userfiltro);

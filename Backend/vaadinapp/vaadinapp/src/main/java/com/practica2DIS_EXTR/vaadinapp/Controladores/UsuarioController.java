@@ -165,20 +165,20 @@ public class UsuarioController {
     }
 
     //para buscar por id cojo el ide del elemento encontrado
-    @GetMapping(value = "/usuarios/{nombre}")
-    public Usuarios buscarUsuarioID (@PathVariable String name) throws IOException{
+    @GetMapping(value = "/usuarios/{id}")
+    public Usuarios buscarUsuarioID (@PathVariable int id) throws IOException{
 
 
         Boolean encontrado = false;
         Usuarios user = null;
-        String identificador = name;
+        int identificador = id;
 
         ArrayList<Usuarios> listausuarios = utils.lecturaJSONUsuarios();
 
         int i = 0;
         while(!encontrado && i < listausuarios.size()){
             Usuarios u = listausuarios.get(i);
-            if(identificador == u.getNombre()){
+            if(identificador == u.getId()){
                 encontrado = true;
                 user = u;
             }
