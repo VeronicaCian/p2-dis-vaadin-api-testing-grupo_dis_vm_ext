@@ -42,5 +42,17 @@
   {
     "id": 5,
     "telefono": 0
+  },
+  {
+    "id": 0,
+    "telefono": 0
+  },
+  {
+    "id": 0,
+    "Nombre": "Carlos",
+    "Departamento": "marketing",
+    "Ubicacion": "Madrid",
+    "telefono": 525968742,
+    "email": "carlosII@gmail.com"
   }
 ]

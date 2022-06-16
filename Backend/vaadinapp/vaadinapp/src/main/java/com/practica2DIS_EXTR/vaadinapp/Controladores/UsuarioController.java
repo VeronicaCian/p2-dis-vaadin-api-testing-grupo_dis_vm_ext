@@ -86,13 +86,13 @@ public class UsuarioController {
 
     //controlador POST para añadir un nuevo objeto al json
     @PostMapping(value = "/usuario", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Usuarios> newUser(@RequestBody Usuarios usuario){
+    public ResponseEntity<Usuarios> newUser(@RequestBody Usuarios usuario) throws IOException{
 
         //instancio una nueva lectura dle JSON
-        ArrayList<Usuarios> arraymarcadores = utils.lecturaJSONUsuarios();
+        ArrayList<Usuarios> arrayusuarios = utils.lecturaJSONUsuarios();
 
         usuario.setId(this.nuevoID.getAndIncrement()); //incrementamos el id para este nuevo onjeto
-        arraymarcadores.add(usuario); //añadimos este nuevo marcador al array
+        arrayusuarios.add(usuario); //añadimos este nuevo marcador al array
         //modificamos el json con estenuevo marcador
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create(); //hacmeos que aparezca bonito en vez de en una linea
@@ -105,7 +105,7 @@ public class UsuarioController {
             e.printStackTrace();
         }
 
-        gson.toJson(arraymarcadores,writer);
+        gson.toJson(arrayusuarios,writer);
 
         try {
             writer.close();

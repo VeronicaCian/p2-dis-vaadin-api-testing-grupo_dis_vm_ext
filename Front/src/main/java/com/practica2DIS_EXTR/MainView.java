@@ -142,7 +142,6 @@ public class MainView extends VerticalLayout {
             e.printStackTrace();
         }
 
-        System.out.println(response.body());
 
         return response.body();
 
@@ -251,7 +250,7 @@ public class MainView extends VerticalLayout {
 
 
         //al pulsar el boton de nuevo usuario
-        btnNewUser.addClickListener( e ->{
+        /*btnNewUser.addClickListener( e ->{
             Dialog dialog = new Dialog();
             VerticalLayout dialogLayout = createDialogUserLayout(dialog);
             dialog.add(dialogLayout);
@@ -267,7 +266,10 @@ public class MainView extends VerticalLayout {
             getStyle().set("position", "fixed").set("top", "0").set("right", "0")
                     .set("bottom", "0").set("left", "0").set("display", "flex")
                     .set("align-items", "center").set("justify-content", "center");
-        });
+        });*/
+
+        //formulario para un nuevo usuario
+        btnNewUser.addClickListener(e-> nuevoModalUser());
 
 
 
@@ -635,6 +637,59 @@ public class MainView extends VerticalLayout {
         dialog.open();
 
     }
+
+    //nuev modal para crear un usuario
+    void nuevoModalUser(){
+        Dialog dialog = new Dialog(); //instaciamos un nuevo dialogo
+
+        //nos declaramos los campos del formulario necesarios para crear un nuevo usuario
+        AtomicInteger id_user = new AtomicInteger();
+        TextField Nombre = new TextField("Nombre");
+        dialog.add(new HorizontalLayout(Nombre));
+        TextField Departamento = new TextField("Departamento");
+        dialog.add(new HorizontalLayout(Departamento));
+        TextField Ubicacion = new TextField("Ubicacion");
+        dialog.add(new HorizontalLayout(Ubicacion));
+        TextField telefono = new TextField("telefono");
+        dialog.add(new HorizontalLayout(telefono));
+        TextField email = new TextField("email");
+        dialog.add(new HorizontalLayout(email));
+
+        //creamos el boton de aceptar
+        Button aceptar = new Button("Añadir", event -> {
+
+            Usuarios user = new Usuarios(id_user,Nombre.getValue(),Departamento.getValue(),Ubicacion.getValue(),telefono.getValue(),email.getValue());
+            //crearUser(user);
+            user.setNombre(Nombre.getValue());
+            user.setDepartamento(Departamento.getValue());
+            user.setUbicacion(Ubicacion.getValue());
+            user.setTelefono(Integer.parseInt(telefono.getValue()));
+            user.setEmail(email.getValue());
+
+            crearUser(user);
+            dialog.close();
+        });
+
+        Button cancelar = new Button("Cancelar", event2 ->{
+            dialog.close();
+        });
+
+        HorizontalLayout opciones = new HorizontalLayout(aceptar,cancelar);
+        dialog.add(opciones);
+        dialog.open();
+
+
+    }
+
+
+
+
+
+
+
+
+
+
 
 
 
