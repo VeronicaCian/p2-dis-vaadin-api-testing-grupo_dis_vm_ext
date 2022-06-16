@@ -86,7 +86,7 @@ public class UsuarioController {
 
     //controlador POST para añadir un nuevo objeto al json
     @PostMapping(value = "/usuario", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity newMarcador(@RequestBody Usuarios usuario){
+    public ResponseEntity<Usuarios> newUser(@RequestBody Usuarios usuario){
 
         //instancio una nueva lectura dle JSON
         ArrayList<Usuarios> arraymarcadores = utils.lecturaJSONUsuarios();
@@ -114,7 +114,7 @@ public class UsuarioController {
         }
 
 
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.CREATED);
 
     }
 
