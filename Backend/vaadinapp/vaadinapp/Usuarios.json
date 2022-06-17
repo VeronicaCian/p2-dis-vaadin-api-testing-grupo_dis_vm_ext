@@ -1,15 +1,15 @@
 [
   {
     "id": 0,
-    "Nombre": "Miguel",
-    "Departamento": "Informatica",
+    "Nombre": "Pedro",
+    "Departamento": "marketing",
     "Ubicacion": "Madrid",
-    "telefono": 603404703,
-    "email": "salasrmcf1997@gmail.com"
+    "telefono": 525968742,
+    "email": "CarlosII@gmail.com"
   },
   {
     "id": 1,
-    "Nombre": "Pablo",
+    "Nombre": "Miguel",
     "Departamento": "Contabilidad",
     "Ubicacion": "Pozuelo",
     "telefono": 638424986,
@@ -17,11 +17,19 @@
   },
   {
     "id": 0,
-    "telefono": 0
+    "Nombre": "Pedro",
+    "Departamento": "marketing",
+    "Ubicacion": "Madrid",
+    "telefono": 525968742,
+    "email": "CarlosII@gmail.com"
   },
   {
     "id": 1,
-    "telefono": 0
+    "Nombre": "Miguel",
+    "Departamento": "Contabilidad",
+    "Ubicacion": "Pozuelo",
+    "telefono": 638424986,
+    "email": "pabloufv@gmail.com"
   },
   {
     "id": 2,
@@ -29,7 +37,7 @@
     "Departamento": "Publicidad",
     "Ubicacion": "Pozuelo",
     "telefono": 638054986,
-    "email": "luciaufv@gmail.com"
+    "email": "luciaufpubli@gmail.com"
   },
   {
     "id": 3,
@@ -45,14 +53,18 @@
   },
   {
     "id": 0,
-    "telefono": 0
-  },
-  {
-    "id": 0,
-    "Nombre": "Carlos",
+    "Nombre": "Pedro",
     "Departamento": "marketing",
     "Ubicacion": "Madrid",
     "telefono": 525968742,
-    "email": "carlosII@gmail.com"
+    "email": "CarlosII@gmail.com"
+  },
+  {
+    "id": 0,
+    "Nombre": "Pedro",
+    "Departamento": "marketing",
+    "Ubicacion": "Madrid",
+    "telefono": 525968742,
+    "email": "CarlosII@gmail.com"
   }
 ]

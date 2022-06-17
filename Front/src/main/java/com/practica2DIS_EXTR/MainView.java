@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.practica2DIS_EXTR.Clases.Equipos;
 import com.practica2DIS_EXTR.Clases.Prestamos;
+import com.practica2DIS_EXTR.Clases.Sistema_Operativo;
 import com.practica2DIS_EXTR.Clases.Usuarios;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Html;
@@ -12,6 +13,7 @@ import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.charts.model.ButtonOptions;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
@@ -63,7 +65,6 @@ public class MainView extends VerticalLayout {
     //metodo para trar desde el backend los usuarios
     private String Getusers(){
         String resource = String.format(URL, "usuarios");
-        System.out.println(resource);
 
         try{
             request = HttpRequest.newBuilder(new URI(resource)).header("Content-type","application/java")
@@ -80,7 +81,6 @@ public class MainView extends VerticalLayout {
             e.printStackTrace();
         }
 
-        System.out.println(response.body());
 
         return response.body();
 
@@ -92,7 +92,6 @@ public class MainView extends VerticalLayout {
     //metodo para trar desde el backend los usuarios
     private String Getuser(int id){
         String resource = String.format(URL2, "usuarios/{id}");
-        System.out.println(resource);
 
         try{
             request = HttpRequest.newBuilder(new URI(resource)).header("Content-type","application/java")
@@ -108,8 +107,6 @@ public class MainView extends VerticalLayout {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-        System.out.println(response.body());
 
         return response.body();
 
@@ -124,7 +121,7 @@ public class MainView extends VerticalLayout {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String string = gson.toJson(newUser, Usuarios.class);
         String resource = String.format(URL, "usuario");
-        System.out.println(resource);
+
 
 
         try{
@@ -148,10 +145,66 @@ public class MainView extends VerticalLayout {
     }
 
 
+
+
+    private String modificarUser(Usuarios userModified){
+
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String string = gson.toJson(userModified, Usuarios.class);
+        String resource = String.format(URL, "usuario");
+
+
+        try{
+            request = HttpRequest.newBuilder(new URI(resource)).header("Content-Type", "application/json").PUT(HttpRequest.BodyPublishers.ofString(string)).build();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+
+        try{
+            response = cliente.send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return response.body();
+    }
+
+
+
+    //DELETE USER
+    private String deleteUser(int id){
+        String resource = String.format(URL2, "usuarios/{id}");
+
+        try{
+            request = HttpRequest.newBuilder(new URI(resource)).header("Content-type","application/java").DELETE().build();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+
+        try{
+            response = cliente.send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return response.body();
+
+    }
+
+
+
+
+
+
+
     //metodo para trar desde el backend los prestamos
     private String GetPrestamos(){
         String resource = String.format(URL, "prestamos");
-        System.out.println(resource);
+
 
         try{
             request = HttpRequest.newBuilder(new URI(resource)).header("Content-type","application/java")
@@ -168,7 +221,63 @@ public class MainView extends VerticalLayout {
             e.printStackTrace();
         }
 
-        System.out.println(response.body());
+        return response.body();
+
+    }
+
+
+
+
+
+    public  String crearPrestamo(Prestamos prestamo){
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String string = gson.toJson(prestamo, Prestamos.class);
+        String resource = String.format(URL, "prestamo");
+
+
+
+        try{
+            request = HttpRequest.newBuilder(new URI(resource)).header("Content-type","application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(string)).build();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+
+        try{
+            response = cliente.send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+        return response.body();
+
+    }
+
+
+
+
+    //metodo para trar desde el backend los prestamos
+    private String GetEquipos(){
+        String resource = String.format(URL, "equipos");
+
+
+        try{
+            request = HttpRequest.newBuilder(new URI(resource)).header("Content-type","application/java")
+                    .GET().build();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+
+        try{
+            response = cliente.send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         return response.body();
 
@@ -210,6 +319,14 @@ public class MainView extends VerticalLayout {
         ArrayList<Usuarios> users;
         Type listausers = new TypeToken<ArrayList<Usuarios>>(){}.getType();
         users = gson2.fromJson(usuariosarray, listausers);
+
+
+        //inicializamos la llamada para los equipos
+        String arayequipos = GetEquipos();
+        Gson gson3 = new GsonBuilder().setPrettyPrinting().create();
+        ArrayList<Equipos> equipos;
+        Type listaequipos = new TypeToken<ArrayList<Equipos>>(){}.getType();
+        equipos = gson3.fromJson(arayequipos, listaequipos);
 
 
 
@@ -317,13 +434,20 @@ public class MainView extends VerticalLayout {
         //Inicio Grid Equipos
 
         Grid<Equipos> EquipoGrid = new Grid<>(Equipos.class);
-        UsersGrid.setSelectionMode(Grid.SelectionMode.SINGLE);
+        EquipoGrid.setSelectionMode(Grid.SelectionMode.SINGLE);
+        EquipoGrid.setItems(equipos);
         //EquipoGrid.removeColumnByKey("id_equipo");
         EquipoGrid.setColumns("tipo","marca","uso");
         EquipoGrid.addColumn(Equipos::getTipo);
         EquipoGrid.addColumn(Equipos::getMarca);
         EquipoGrid.addColumn(Equipos::getUso);
 
+        EquipoGrid.setWidth("100%");
+
+        //listener para cuando el usuario selecciones una fila del grid
+        EquipoGrid.asSingleSelect().addValueChangeListener(e ->
+                //AQUI VA LA LLAMADA AL MODAL DE VER LOS EQUIPOS
+            modalinfoEquipos(e.getValue()));
 
         //Fin Grid equipos
 
@@ -380,22 +504,7 @@ public class MainView extends VerticalLayout {
 
 
         //al pulsar el boton de nuevo usuario
-        btnNewPrestamo.addClickListener( e ->{
-            Dialog dialog2 = new Dialog();
-            VerticalLayout dialogLayout = createDialogPrestamoLayout();
-            dialog2.add(dialogLayout);
-
-            Button cancelButton = new Button("Cancel", e1 -> dialog2.close());
-            dialog2.add(cancelButton);
-
-
-            dialog2.open();
-
-            // Center the button within the example
-            getStyle().set("position", "fixed").set("top", "0").set("right", "0")
-                    .set("bottom", "0").set("left", "0").set("display", "flex")
-                    .set("align-items", "center").set("justify-content", "center");
-        });
+        btnNewPrestamo.addClickListener( e ->nuevoModalPrestamo());
 
 
 
@@ -441,6 +550,8 @@ public class MainView extends VerticalLayout {
         //FIN TABSHEET
 
     }
+
+
     //FIN CONTSTRUCTOR DE MAINVIEW
 
 
@@ -474,7 +585,7 @@ public class MainView extends VerticalLayout {
         Button btnAñadir = new Button("Añadir" ,e -> {
             //agregamos la funcioalidad de agregar el usuarios con los datos del textfield
             //instanciamos un nuevo usuario
-            Usuarios user = new Usuarios(id_user,Nombre.getValue(),Departamento.getValue(),Ubicacion.getValue(),telefono.getValue(),email.getValue());
+            Usuarios user = new Usuarios(5,Nombre.getValue(),Departamento.getValue(),Ubicacion.getValue(),telefono.getValue(),email.getValue());
             //MainView m = new MainView();
             crearUser(user);
             UI.getCurrent().getPage().reload();
@@ -568,8 +679,11 @@ public class MainView extends VerticalLayout {
             dialog.add(new HorizontalLayout(new Html("<b>Telefono:  </b>"), new Text(String.valueOf(user.getTelefono()))));
             dialog.add(new HorizontalLayout(new Html("<b>email:  </b>"),new Text(user.getEmail())));
 
+            //imprim por consola el id del usuario para ver si lo coge bien y poder eliminarlo
+            System.out.println(user.getId());
+
             Button modificaruser = new Button("Editar", event -> {dialog.close(); editarmodaluser(user);});
-            Button deleteuser = new Button("Eliminar");
+            Button deleteuser = new Button("Eliminar", event -> deleteUser(user.getId()));
             Button cancelButton = new Button("Cancelar", event -> { dialog.close(); });
             HorizontalLayout actions2 = new HorizontalLayout(modificaruser, cancelButton,deleteuser);
             dialog.add(actions2);
@@ -625,6 +739,8 @@ public class MainView extends VerticalLayout {
 
             //guardamos los cambios
             //LLAMADA A FUNCION DE PUT como modificaUser(user)
+            modificarUser(user);
+            UI.getCurrent().getPage().reload();
             dialog.close();
 
         });
@@ -643,7 +759,7 @@ public class MainView extends VerticalLayout {
         Dialog dialog = new Dialog(); //instaciamos un nuevo dialogo
 
         //nos declaramos los campos del formulario necesarios para crear un nuevo usuario
-        AtomicInteger id_user = new AtomicInteger();
+
         TextField Nombre = new TextField("Nombre");
         dialog.add(new HorizontalLayout(Nombre));
         TextField Departamento = new TextField("Departamento");
@@ -658,7 +774,8 @@ public class MainView extends VerticalLayout {
         //creamos el boton de aceptar
         Button aceptar = new Button("Añadir", event -> {
 
-            Usuarios user = new Usuarios(id_user,Nombre.getValue(),Departamento.getValue(),Ubicacion.getValue(),telefono.getValue(),email.getValue());
+
+            Usuarios user = new Usuarios(7,Nombre.getValue(),Departamento.getValue(),Ubicacion.getValue(),telefono.getValue(),email.getValue());
             //crearUser(user);
             user.setNombre(Nombre.getValue());
             user.setDepartamento(Departamento.getValue());
@@ -782,6 +899,108 @@ public class MainView extends VerticalLayout {
         dialogo.open();
 
 
+    }
+
+
+    //modal para un nuevo prestamos
+    void nuevoModalPrestamo(){
+
+        Dialog dialog = new Dialog();
+
+
+        //nos creamos los diferentes textfields para ingresar los datos
+        IntegerField id_Equipo = new IntegerField("ID Equipo");
+        dialog.add(new HorizontalLayout(id_Equipo));
+        IntegerField id_Usuario = new IntegerField("ID Usuario");
+        dialog.add(new HorizontalLayout(id_Usuario));
+        TextField fechaIni = new TextField("Fecha Inicio Prestamo");
+        dialog.add(new HorizontalLayout(fechaIni));
+        TextField fechaFin = new TextField("Fecha Fin Prestamo");
+        dialog.add(new HorizontalLayout(fechaFin));
+        TextField fechaReal = new TextField("Fecha Real Devlucion");
+        dialog.add(new HorizontalLayout(fechaReal));
+        TextField comentarios = new TextField("comentarios");
+        dialog.add(new HorizontalLayout(comentarios));
+
+
+        //nos creamos el boton de aceptar para confirmar el nuevo prestamo
+        Button aceptar = new Button("Añadir",event -> {
+            Prestamos prestamo = new Prestamos(4,id_Usuario.getValue(),id_Equipo.getValue(),fechaIni.getValue(),fechaFin.getValue(),fechaReal.getValue(),comentarios.getValue());
+
+            prestamo.setUsuario_Id(id_Usuario.getValue());
+            prestamo.setEquipo_Id(id_Equipo.getValue());
+            prestamo.setFecha_Inicio_Prestamo(fechaIni.getValue());
+            prestamo.setFecha_Fin_Prestamo(fechaFin.getValue());
+            prestamo.setFecha_Real_Dev(fechaReal.getValue());
+            prestamo.setComentarios(comentarios.getValue());
+
+            crearPrestamo(prestamo);
+            UI.getCurrent().getPage().reload();
+            dialog.close();
+
+
+        });
+
+        Button cancelar = new Button("Cancelar", event2 ->{
+            dialog.close();
+        });
+
+        HorizontalLayout opciones = new HorizontalLayout(aceptar,cancelar);
+        dialog.add(opciones);
+        dialog.open();
+
+    }
+
+
+    //modal info de los equipos
+    void modalinfoEquipos(Equipos equipos){
+
+
+        try{
+
+            Dialog dialog = new Dialog(); //modal instanciado
+            dialog.setCloseOnEsc(false);
+            dialog.setCloseOnOutsideClick(false);
+
+            //declaramos los textfields necesarios
+            dialog.add(new HorizontalLayout(new Html("<b>Tipo: </b>"), new Text(equipos.getTipo())));
+            dialog.add(new HorizontalLayout(new Html("<b>Marca: </b>"), new Text(equipos.getMarca())));
+            dialog.add(new HorizontalLayout(new Html("<b>Uso: </b>"), new Text(equipos.getUso())));
+            dialog.add(new HorizontalLayout(new Html("<b>       SISTEMA OPERATIVO: </b>")));
+            dialog.add(new HorizontalLayout(new Html("<b>Nombre SO: </b>"), new Text(equipos.getSistema_operativo().nombreSO)));
+            dialog.add(new HorizontalLayout(new Html("<b>Version SO: </b>"), new Text(equipos.getSistema_operativo().versionSO)));
+            dialog.add(new HorizontalLayout(new Html("<b>       HARDWARE: </b>")));
+            dialog.add(new HorizontalLayout(new Html("<b>Procesador SO: </b>"), new Text(equipos.getHardware().Procesador)));
+            dialog.add(new HorizontalLayout(new Html("<b>Memoria: </b>"), new Text(String.valueOf(equipos.getHardware().Memoria))));
+            dialog.add(new HorizontalLayout(new Html("<b>       DISCO DURO: </b>")));
+            dialog.add(new HorizontalLayout(new Html("<b>Tipo disco SO: </b>"), new Text(equipos.getHardware().getDiscoduro().getTipodisco())));
+            dialog.add(new HorizontalLayout(new Html("<b>capacidad: </b>"), new Text(equipos.getHardware().getDiscoduro().getCapacidad())));
+            dialog.add(new HorizontalLayout(new Html("<b>       PANTALLA: </b>")));
+            dialog.add(new HorizontalLayout(new Html("<b>Diagonal: </b>"), new Text(String.valueOf(equipos.getHardware().getPantalla().Diagonal))));
+            dialog.add(new HorizontalLayout(new Html("<b>Resolucion SO: </b>"), new Text(equipos.getHardware().getPantalla().Resolucion)));
+            dialog.add(new HorizontalLayout(new Html("<b>       SOFTWARE: </b>")));
+            dialog.add(new HorizontalLayout(new Html("<b>       Licencia de Pago: </b>")));
+            dialog.add(new HorizontalLayout(new Html("<b>Nombre Licencia Pago: </b>"), new Text(equipos.getSoftware().getLicenciapago().NombreSP)));
+            dialog.add(new HorizontalLayout(new Html("<b>Version Licencia Pago: </b>"), new Text(equipos.getSoftware().getLicenciapago().VersionSP)));
+            dialog.add(new HorizontalLayout(new Html("<b>Tipo Licencia Pago: </b>"), new Text(equipos.getSoftware().getLicenciapago().TipoSP)));
+            dialog.add(new HorizontalLayout(new Html("<b>       Licencia Libre: </b>")));
+            dialog.add(new HorizontalLayout(new Html("<b>Nombre Licencia Libre: </b>"), new Text(equipos.getSoftware().getLicencialibre().NombreSL)));
+            dialog.add(new HorizontalLayout(new Html("<b>Version Licencia Libre: </b>"), new Text(equipos.getSoftware().getLicencialibre().VersionSL)));
+
+            //impirmo por consola el id del equipo para ver si lo coge bien
+            System.out.println(equipos.getIdEquipo());
+
+            Button cancelButton = new Button("Cancelar", event -> { dialog.close(); });
+            HorizontalLayout actions2 = new HorizontalLayout(cancelButton);
+            dialog.add(actions2);
+
+            dialog.open();
+
+
+
+        } catch (Exception e) {
+             e.printStackTrace();
+         }
     }
 
 

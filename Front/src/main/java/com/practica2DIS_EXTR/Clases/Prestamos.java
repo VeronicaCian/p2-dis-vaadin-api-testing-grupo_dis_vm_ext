@@ -42,6 +42,7 @@ public class Prestamos {
         this.Equipo_Id = Equipo_Id;
     }
 
+
     public int getEquipo_Id() {
         return Equipo_Id;
     }

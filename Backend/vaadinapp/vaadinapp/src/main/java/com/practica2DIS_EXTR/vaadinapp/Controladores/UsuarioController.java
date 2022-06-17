@@ -34,7 +34,7 @@ public class UsuarioController {
 
     }
 
-    @PutMapping(path = "/usuarios",
+    @PutMapping(path = "/usuario",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity modifyUsuario (@RequestBody Usuarios usuariomodificado) throws IOException {

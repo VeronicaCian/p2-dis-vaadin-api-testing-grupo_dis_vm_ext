@@ -52,5 +52,14 @@
     "Fecha_Fin_Prestamo": "27/02/98",
     "Fecha_Real_Dev": "27/02/98",
     "Comentarios": "xxx"
+  },
+  {
+    "id": 0,
+    "Usuario_Id": 0,
+    "Equipo_Id": 2,
+    "Fecha_Inicio_Prestamo": "ffff",
+    "Fecha_Fin_Prestamo": "ggh",
+    "Fecha_Real_Dev": "",
+    "Comentarios": "dgfhgfth"
   }
 ]
