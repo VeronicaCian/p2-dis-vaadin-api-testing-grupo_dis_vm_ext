@@ -571,7 +571,7 @@ public class MainView extends VerticalLayout {
         AtomicInteger id_user = new AtomicInteger();
         TextField Nombre = new TextField("Nombre");
         TextField Departamento = new TextField("Departamento");
-        TextField telefono = new TextField("Telefono");
+        IntegerField telefono = new IntegerField("Telefono");
         TextField email = new TextField("Email");
         TextField Ubicacion = new TextField("Ubicación");
 
@@ -586,7 +586,7 @@ public class MainView extends VerticalLayout {
         Button btnAñadir = new Button("Añadir" ,e -> {
             //agregamos la funcioalidad de agregar el usuarios con los datos del textfield
             //instanciamos un nuevo usuario
-            Usuarios user = new Usuarios(5,Nombre.getValue(),Departamento.getValue(),Ubicacion.getValue(),telefono.getValue(),email.getValue());
+            Usuarios user = new Usuarios(Nombre.getValue(),Departamento.getValue(),Ubicacion.getValue(),telefono.getValue(),email.getValue());
             //MainView m = new MainView();
             crearUser(user);
             UI.getCurrent().getPage().reload();
@@ -771,7 +771,7 @@ public class MainView extends VerticalLayout {
         dialog.add(new HorizontalLayout(Departamento));
         TextField Ubicacion = new TextField("Ubicacion");
         dialog.add(new HorizontalLayout(Ubicacion));
-        TextField telefono = new TextField("telefono");
+        IntegerField telefono = new IntegerField("telefono");
         dialog.add(new HorizontalLayout(telefono));
         TextField email = new TextField("email");
         dialog.add(new HorizontalLayout(email));
@@ -780,15 +780,18 @@ public class MainView extends VerticalLayout {
         Button aceptar = new Button("Añadir", event -> {
 
 
-            Usuarios user = new Usuarios(7,Nombre.getValue(),Departamento.getValue(),Ubicacion.getValue(),telefono.getValue(),email.getValue());
+            Usuarios user = new Usuarios(Nombre.getValue(),Departamento.getValue(),Ubicacion.getValue(),telefono.getValue(),email.getValue());
             //crearUser(user);
+
             user.setNombre(Nombre.getValue());
             user.setDepartamento(Departamento.getValue());
             user.setUbicacion(Ubicacion.getValue());
-            user.setTelefono(Integer.parseInt(telefono.getValue()));
+            //user.setTelefono(Integer.parseInt(telefono.getValue()));
+            user.setTelefono(telefono.getValue());
             user.setEmail(email.getValue());
 
             crearUser(user);
+            UI.getCurrent().getPage().reload();
             dialog.close();
         });
 

@@ -31,8 +31,8 @@ public class Usuarios {
     }
 
 
-    public Usuarios(int id_user, String value, String value1, String value2, String value3, String value4) {
-        this.id = id;
+    public Usuarios(String Nombre, String Departamento, String Ubicacion, int telefono, String email) {
+
         this.email = email;
         this.Departamento = Departamento;
         this.Nombre = Nombre;

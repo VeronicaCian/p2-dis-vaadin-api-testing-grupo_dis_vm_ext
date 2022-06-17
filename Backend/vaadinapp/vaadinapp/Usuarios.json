@@ -14,5 +14,13 @@
     "Ubicacion": "Pozuelo",
     "telefono": 638424986,
     "email": "pabloufv@gmail.com"
+  },
+  {
+    "id": 0,
+    "Nombre": "Lucia",
+    "Departamento": "Informatica",
+    "Ubicacion": "Madrid",
+    "telefono": 698745258,
+    "email": "luciaufv@gmail.com"
   }
 ]
