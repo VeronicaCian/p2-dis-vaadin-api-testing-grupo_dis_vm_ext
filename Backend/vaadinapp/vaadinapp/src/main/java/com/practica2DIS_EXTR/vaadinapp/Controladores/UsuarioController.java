@@ -119,8 +119,8 @@ public class UsuarioController {
     }
 
     //para buscar por id cojo el ide del elemento encontrado
-    @DeleteMapping(value = "/usuarios/{id}")
-    public ResponseEntity deleteMarcador (@PathVariable int id) throws IOException{
+    @DeleteMapping(value = "/usuario/{id}")
+    public ResponseEntity deleteUser (@PathVariable("id") int id) throws IOException{
 
 
         Boolean encontrado = false;

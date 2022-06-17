@@ -56,7 +56,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class MainView extends VerticalLayout {
 
     private static final String URL = "http://localhost:8081/api/%s";
-    private static final String URL2 = "http://localhost:8081/api/%s/%i";
+    private static final String URL2 = "http://localhost:8081/api/%s/%d";
     //private static HttpRequest request;
     HttpRequest request;
     HttpClient cliente = HttpClient.newBuilder().build();
@@ -173,9 +173,10 @@ public class MainView extends VerticalLayout {
 
 
 
+
     //DELETE USER
     private String deleteUser(int id){
-        String resource = String.format(URL2, "usuarios/{id}");
+        String resource = String.format(URL2, "usuario", id);
 
         try{
             request = HttpRequest.newBuilder(new URI(resource)).header("Content-type","application/java").DELETE().build();
@@ -683,7 +684,11 @@ public class MainView extends VerticalLayout {
             System.out.println(user.getId());
 
             Button modificaruser = new Button("Editar", event -> {dialog.close(); editarmodaluser(user);});
-            Button deleteuser = new Button("Eliminar", event -> deleteUser(user.getId()));
+            Button deleteuser = new Button("Eliminar", event -> {
+                deleteUser(user.getId());
+                UI.getCurrent().getPage().reload();
+
+            });
             Button cancelButton = new Button("Cancelar", event -> { dialog.close(); });
             HorizontalLayout actions2 = new HorizontalLayout(modificaruser, cancelButton,deleteuser);
             dialog.add(actions2);

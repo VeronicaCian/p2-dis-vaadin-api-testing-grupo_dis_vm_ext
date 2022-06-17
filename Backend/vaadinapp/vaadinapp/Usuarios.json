@@ -1,13 +1,5 @@
 [
   {
-    "id": 0,
-    "Nombre": "Pedro",
-    "Departamento": "marketing",
-    "Ubicacion": "Madrid",
-    "telefono": 525968742,
-    "email": "CarlosII@gmail.com"
-  },
-  {
     "id": 1,
     "Nombre": "Miguel",
     "Departamento": "Contabilidad",
@@ -16,55 +8,11 @@
     "email": "pabloufv@gmail.com"
   },
   {
-    "id": 0,
-    "Nombre": "Pedro",
-    "Departamento": "marketing",
-    "Ubicacion": "Madrid",
-    "telefono": 525968742,
-    "email": "CarlosII@gmail.com"
-  },
-  {
     "id": 1,
     "Nombre": "Miguel",
     "Departamento": "Contabilidad",
     "Ubicacion": "Pozuelo",
     "telefono": 638424986,
     "email": "pabloufv@gmail.com"
-  },
-  {
-    "id": 2,
-    "Nombre": "Lucia",
-    "Departamento": "Publicidad",
-    "Ubicacion": "Pozuelo",
-    "telefono": 638054986,
-    "email": "luciaufpubli@gmail.com"
-  },
-  {
-    "id": 3,
-    "telefono": 0
-  },
-  {
-    "id": 4,
-    "telefono": 0
-  },
-  {
-    "id": 5,
-    "telefono": 0
-  },
-  {
-    "id": 0,
-    "Nombre": "Pedro",
-    "Departamento": "marketing",
-    "Ubicacion": "Madrid",
-    "telefono": 525968742,
-    "email": "CarlosII@gmail.com"
-  },
-  {
-    "id": 0,
-    "Nombre": "Pedro",
-    "Departamento": "marketing",
-    "Ubicacion": "Madrid",
-    "telefono": 525968742,
-    "email": "CarlosII@gmail.com"
   }
 ]
