@@ -3,7 +3,7 @@
         "id_equipo": 0,
         "Tipo": "Portatil",
         "Marca": "Samsung",
-        "Uso": "realizacion examen matlab",
+        "Uso": "Comercial",
         "Sistema_operativo":{
             "nombreSO": "Windows",
             "versionSO": "10"
@@ -38,7 +38,7 @@
         "id_equipo": 1,
         "Tipo": "Portatil",
         "Marca": "HP",
-        "Uso": "realizacion practicas de DIS",
+        "Uso": "Facturación",
         "Sistema_operativo":{
             "nombreSO": "Windows",
             "versionSO": "10"
@@ -68,5 +68,356 @@
         }
 
 
+    },
+    {
+        "id_equipo": 2,
+        "Tipo": "Sobremesa",
+        "Marca": "Lenovo",
+        "Uso": "Ventas",
+        "Sistema_operativo":{
+            "nombreSO": "Windows",
+            "versionSO": "10"
+        },
+        "Hardware":{
+            "Procesador": "Intel core i5",
+            "Memoria": 2.9,
+            "Disco_Duro":{
+                "tipo_disco": "SATA",
+                "capacidad": "2TB"
+            },
+            "Pantalla":{
+                "Diagonal": 15,
+                "Resolucion": "HD"
+            }
+        },
+        "Software":{
+            "Licencia_Pago":{
+                "NombreSP": "GitBash Professional",
+                "VersionSP": "2022",
+                "TipoSP":"OEM"
+            },
+            "Licencia_Libre":{
+                "NombreSL": "Mozilla firefox",
+                "VersionSL": "2020"
+            }
+        }
+
+
+    },
+    {
+        "id_equipo": 3,
+        "Tipo": "Portatil",
+        "Marca": "Toshiba",
+        "Uso": "Desarrollo",
+        "Sistema_operativo":{
+            "nombreSO": "Windows",
+            "versionSO": "11"
+        },
+        "Hardware":{
+            "Procesador": "Intel core i7",
+            "Memoria": 3.2,
+            "Disco_Duro":{
+                "tipo_disco": "SSD",
+                "capacidad": "516GB"
+            },
+            "Pantalla":{
+                "Diagonal": 10,
+                "Resolucion": "HD"
+            }
+        },
+        "Software":{
+            "Licencia_Pago":{
+                "NombreSP": "Matlab Professional",
+                "VersionSP": "2022",
+                "TipoSP":"OEM"
+            },
+            "Licencia_Libre":{
+                "NombreSL": "Google Chrome",
+                "VersionSL": "4.1"
+            }
+        }
+
+
+    },
+    {
+        "id_equipo": 4,
+        "Tipo": "Sobremesa",
+        "Marca": "LG",
+        "Uso": "RRHH",
+        "Sistema_operativo":{
+            "nombreSO": "Windows",
+            "versionSO": "10"
+        },
+        "Hardware":{
+            "Procesador": "Intel core i5",
+            "Memoria": 4.2,
+            "Disco_Duro":{
+                "tipo_disco": "SSD",
+                "capacidad": "1TB"
+            },
+            "Pantalla":{
+                "Diagonal": 10,
+                "Resolucion": "HD"
+            }
+        },
+        "Software":{
+            "Licencia_Pago":{
+                "NombreSP": "Matlab Professional",
+                "VersionSP": "2021",
+                "TipoSP":"OEM"
+            },
+            "Licencia_Libre":{
+                "NombreSL": "Mozilla firefox",
+                "VersionSL": "2019"
+            }
+        }
+
+
+    },
+    {
+        "id_equipo": 5,
+        "Tipo": "Portatil",
+        "Marca": "Lenovo",
+        "Uso": "Ventas",
+        "Sistema_operativo":{
+            "nombreSO": "Windows",
+            "versionSO": "10"
+        },
+        "Hardware":{
+            "Procesador": "Intel core i7",
+            "Memoria": 3.5,
+            "Disco_Duro":{
+                "tipo_disco": "SSD",
+                "capacidad": "2TB"
+            },
+            "Pantalla":{
+                "Diagonal": 10,
+                "Resolucion": "FULL HD"
+            }
+        },
+        "Software":{
+            "Licencia_Pago":{
+                "NombreSP": "GitBash Professional",
+                "VersionSP": "2022",
+                "TipoSP":"OEM"
+            },
+            "Licencia_Libre":{
+                "NombreSL": "Mozilla firefox",
+                "VersionSL": "2019"
+            }
+        }
+
+
+    },
+    {
+        "id_equipo": 6,
+        "Tipo": "Portatil",
+        "Marca": "Samsung",
+        "Uso": "Facturación",
+        "Sistema_operativo":{
+            "nombreSO": "Windows",
+            "versionSO": "10"
+        },
+        "Hardware":{
+            "Procesador": "Intel core i7",
+            "Memoria": 3.2,
+            "Disco_Duro":{
+                "tipo_disco": "SSD",
+                "capacidad": "1TB"
+            },
+            "Pantalla":{
+                "Diagonal": 10,
+                "Resolucion": "HD"
+            }
+        },
+        "Software":{
+            "Licencia_Pago":{
+                "NombreSP": "Adobe Acrobat DC",
+                "VersionSP": "2018",
+                "TipoSP":"OEM"
+            },
+            "Licencia_Libre":{
+                "NombreSL": "Google Chrome",
+                "VersionSL": "2019"
+            }
+        }
+
+
+    },
+    {
+        "id_equipo": 7,
+        "Tipo": "Sobremesa",
+        "Marca": "Lenovo",
+        "Uso": "Personal",
+        "Sistema_operativo":{
+            "nombreSO": "Windows",
+            "versionSO": "8"
+        },
+        "Hardware":{
+            "Procesador": "Intel core i5",
+            "Memoria": 3.0,
+            "Disco_Duro":{
+                "tipo_disco": "SSD",
+                "capacidad": "256GB"
+            },
+            "Pantalla":{
+                "Diagonal": 10,
+                "Resolucion": "HD"
+            }
+        },
+        "Software":{
+            "Licencia_Pago":{
+                "NombreSP": "GitBash Professional",
+                "VersionSP": "2019",
+                "TipoSP":"OEM"
+            },
+            "Licencia_Libre":{
+                "NombreSL": "Mozilla firefox",
+                "VersionSL": "2019"
+            }
+        }
+
+
+    },
+    {
+        "id_equipo": 8,
+        "Tipo": "Portatil",
+        "Marca": "Samsung",
+        "Uso": "Comercial",
+        "Sistema_operativo":{
+            "nombreSO": "Windows",
+            "versionSO": "10"
+        },
+        "Hardware":{
+            "Procesador": "Intel core i9",
+            "Memoria": 5.5,
+            "Disco_Duro":{
+                "tipo_disco": "SSD",
+                "capacidad": "1TB"
+            },
+            "Pantalla":{
+                "Diagonal": 10,
+                "Resolucion": "HD"
+            }
+        },
+        "Software":{
+            "Licencia_Pago":{
+                "NombreSP": "Photoshop Professional",
+                "VersionSP": "2022",
+                "TipoSP":"OEM"
+            },
+            "Licencia_Libre":{
+                "NombreSL": "Mozilla firefox",
+                "VersionSL": "2022"
+            }
+        }
+
+
+    },
+    {
+        "id_equipo": 9,
+        "Tipo": "Sobremesa",
+        "Marca": "HP",
+        "Uso": "RRHH ",
+        "Sistema_operativo":{
+            "nombreSO": "Windows",
+            "versionSO": "11"
+        },
+        "Hardware":{
+            "Procesador": "Intel core i9",
+            "Memoria": 5.5,
+            "Disco_Duro":{
+                "tipo_disco": "SSD",
+                "capacidad": "3TB"
+            },
+            "Pantalla":{
+                "Diagonal": 10,
+                "Resolucion": "FULL HD"
+            }
+        },
+        "Software":{
+            "Licencia_Pago":{
+                "NombreSP": "Adobe Acrobat",
+                "VersionSP": "2022",
+                "TipoSP":"OEM"
+            },
+            "Licencia_Libre":{
+                "NombreSL": "Mozilla firefox",
+                "VersionSL": "2019"
+            }
+        }
+
+
+    },
+    {
+        "id_equipo": 10,
+        "Tipo": "Sobremesa",
+        "Marca": "Samsung",
+        "Uso": "Desarrollo",
+        "Sistema_operativo":{
+            "nombreSO": "Windows",
+            "versionSO": "11"
+        },
+        "Hardware":{
+            "Procesador": "Intel core i9",
+            "Memoria": 5.5,
+            "Disco_Duro":{
+                "tipo_disco": "SSD",
+                "capacidad": "1TB"
+            },
+            "Pantalla":{
+                "Diagonal": 10,
+                "Resolucion": "FULL HD"
+            }
+        },
+        "Software":{
+            "Licencia_Pago":{
+                "NombreSP": "Matlab Professional",
+                "VersionSP": "2022.2",
+                "TipoSP":"OEM"
+            },
+            "Licencia_Libre":{
+                "NombreSL": "Docker",
+                "VersionSL": "2022"
+            }
+        }
+
+
+    },
+    {
+        "id_equipo": 11,
+        "Tipo": "Portatil",
+        "Marca": "Lenovo",
+        "Uso": "Comercial",
+        "Sistema_operativo":{
+            "nombreSO": "Windows",
+            "versionSO": "8"
+        },
+        "Hardware":{
+            "Procesador": "Intel core i7",
+            "Memoria": 4.2,
+            "Disco_Duro":{
+                "tipo_disco": "SSD",
+                "capacidad": "256GB"
+            },
+            "Pantalla":{
+                "Diagonal": 13,
+                "Resolucion": "HD"
+            }
+        },
+        "Software":{
+            "Licencia_Pago":{
+                "NombreSP": "Matlab Professional",
+                "VersionSP": "2022",
+                "TipoSP":"OEM"
+            },
+            "Licencia_Libre":{
+                "NombreSL": "Mozilla firefox",
+                "VersionSL": "2022"
+            }
+        }
+
+
     }
+
 ]

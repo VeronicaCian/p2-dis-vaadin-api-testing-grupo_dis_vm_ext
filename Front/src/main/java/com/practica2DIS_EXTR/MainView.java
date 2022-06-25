@@ -90,8 +90,8 @@ public class MainView extends VerticalLayout {
 
 
     //metodo para trar desde el backend los usuarios
-    private String Getuser(int id){
-        String resource = String.format(URL2, "usuarios/{id}");
+    private String Getuser(String name){
+        String resource = String.format(URL2, "usuarios", name);
 
         try{
             request = HttpRequest.newBuilder(new URI(resource)).header("Content-type","application/java")
@@ -296,13 +296,13 @@ public class MainView extends VerticalLayout {
     final Tab pestañaEquipo;
     final Map<Tab, Component> tabsToPages = new HashMap<>();
     final Tabs tabs;
-    final IntegerField filtros;
+    final TextField filtros;
 
 
     public MainView() {
 
 
-        this.filtros = new IntegerField();
+        this.filtros = new TextField();
         //objetos inciales
         //Inicializamos una llamada para coger los prestamos y meterlos en un array
         VerticalLayout totalayout = new VerticalLayout();
@@ -345,19 +345,19 @@ public class MainView extends VerticalLayout {
         //nos creamos el boton de añadir un nuevo usuario
         Button btnNewUser = new Button("Nuevo User");
         Button btnAgregarUser = new Button("Añadir");
+        Button buscar = new Button("Buscar usuario");
 
         //Inicio grid Usuarios
 
         Grid<Usuarios> UsersGrid = new Grid<>(Usuarios.class);
-        UsersGrid.setSelectionMode(Grid.SelectionMode.SINGLE);
         UsersGrid.setItems(users);
         UsersGrid.removeColumnByKey("id");
-        UsersGrid.setColumns("nombre", "departamento", "ubicacion", "telefono", "email");
-        UsersGrid.addColumn(Usuarios::getNombre);
-        UsersGrid.addColumn(Usuarios::getDepartamento);
-        UsersGrid.addColumn(Usuarios::getTelefono);
-        UsersGrid.addColumn(Usuarios::getEmail);
-        UsersGrid.addColumn(Usuarios::getUbicacion);
+        //UsersGrid.setColumns("nombre", "departamento", "ubicacion", "telefono", "email");
+        UsersGrid.addColumn(Usuarios::getNombre).setHeader("Nombre");
+        UsersGrid.addColumn(Usuarios::getDepartamento).setHeader("Departamento");
+        UsersGrid.addColumn(Usuarios::getTelefono).setHeader("Ubicacion");
+        UsersGrid.addColumn(Usuarios::getEmail).setHeader("telefono");
+        UsersGrid.addColumn(Usuarios::getUbicacion).setHeader("email");
 
         UsersGrid.setWidth("100%");
 
@@ -393,7 +393,7 @@ public class MainView extends VerticalLayout {
 
         //fin grid Usuarios
 
-        HorizontalUsersLayout.add(btnNewUser);
+        HorizontalUsersLayout.add(btnNewUser,buscar);
         VerticalUsersLayout.add(filtros,UsersGrid, HorizontalUsersLayout);
         divUsers.add(VerticalUsersLayout);
         divUsers.getStyle().set("flex-wrap", "wrap");
@@ -403,15 +403,19 @@ public class MainView extends VerticalLayout {
         filtros.setValueChangeMode(ValueChangeMode.EAGER);
         filtros.addValueChangeListener(e ->{
 
-           String user= Getuser(e.getValue());
+           // modalinfo(e.getValue());
+           /*String user= Getuser(e.getValue());
            Usuarios userfiltro = gson2.fromJson(usuariosarray, listausers);
            if(userfiltro != null){
                UsersGrid.setItems(userfiltro);
            }else{
                UsersGrid.setItems(users);
-           }
+           }*/
 
         });
+
+
+
         //FIN LAYOUT USUARIOS
 
 
@@ -586,7 +590,9 @@ public class MainView extends VerticalLayout {
         Button btnAñadir = new Button("Añadir" ,e -> {
             //agregamos la funcioalidad de agregar el usuarios con los datos del textfield
             //instanciamos un nuevo usuario
-            Usuarios user = new Usuarios(Nombre.getValue(),Departamento.getValue(),Ubicacion.getValue(),telefono.getValue(),email.getValue());
+            int id = id_user.intValue();
+
+            Usuarios user = new Usuarios(id,Nombre.getValue(),Departamento.getValue(),Ubicacion.getValue(),telefono.getValue(),email.getValue());
             //MainView m = new MainView();
             crearUser(user);
             UI.getCurrent().getPage().reload();
@@ -765,6 +771,7 @@ public class MainView extends VerticalLayout {
 
         //nos declaramos los campos del formulario necesarios para crear un nuevo usuario
 
+        AtomicInteger idusuario = new AtomicInteger();
         TextField Nombre = new TextField("Nombre");
         dialog.add(new HorizontalLayout(Nombre));
         TextField Departamento = new TextField("Departamento");
@@ -779,10 +786,12 @@ public class MainView extends VerticalLayout {
         //creamos el boton de aceptar
         Button aceptar = new Button("Añadir", event -> {
 
+            int id = idusuario.intValue();
 
-            Usuarios user = new Usuarios(Nombre.getValue(),Departamento.getValue(),Ubicacion.getValue(),telefono.getValue(),email.getValue());
+            Usuarios user = new Usuarios(id,Nombre.getValue(),Departamento.getValue(),Ubicacion.getValue(),telefono.getValue(),email.getValue());
             //crearUser(user);
 
+            user.setId(idusuario.getAndIncrement());
             user.setNombre(Nombre.getValue());
             user.setDepartamento(Departamento.getValue());
             user.setUbicacion(Ubicacion.getValue());
@@ -916,11 +925,33 @@ public class MainView extends VerticalLayout {
         Dialog dialog = new Dialog();
 
 
+        //Inicializamos una llamada para coger los usuarios y meterlos en un array
+        String usuariosarray = Getusers();
+        Gson gson2 = new GsonBuilder().setPrettyPrinting().create();
+        ArrayList<Usuarios> users;
+        Type listausers = new TypeToken<ArrayList<Usuarios>>(){}.getType();
+        users = gson2.fromJson(usuariosarray, listausers);
+
+        //Inicializamos una llamada para coger los usuarios y meterlos en un array
+        String equiposarray = GetEquipos();
+        ArrayList<Equipos> equipo;
+        Type listaequipo = new TypeToken<ArrayList<Usuarios>>(){}.getType();
+        equipo = gson2.fromJson(equiposarray, listaequipo);
+
+        //nos creamos un array de usuarios para introducir los id
+        ArrayList<Integer> usersid = new ArrayList<Integer>();
+        ComboBox<Integer> usuarios = new ComboBox<Integer>("Usuarios");
+
+        ArrayList<Integer> equipoid = new ArrayList<>();
+        ComboBox<Integer> equipos = new ComboBox<>("Equipos");
+
+        dialog.add(new HorizontalLayout(usuarios));
+        //dialog.add(new HorizontalLayout(equipos));
         //nos creamos los diferentes textfields para ingresar los datos
         IntegerField id_Equipo = new IntegerField("ID Equipo");
         dialog.add(new HorizontalLayout(id_Equipo));
-        IntegerField id_Usuario = new IntegerField("ID Usuario");
-        dialog.add(new HorizontalLayout(id_Usuario));
+        //IntegerField id_Usuario = new IntegerField("ID Usuario");
+        //dialog.add(new HorizontalLayout(id_Usuario));
         TextField fechaIni = new TextField("Fecha Inicio Prestamo");
         dialog.add(new HorizontalLayout(fechaIni));
         TextField fechaFin = new TextField("Fecha Fin Prestamo");
@@ -931,11 +962,23 @@ public class MainView extends VerticalLayout {
         dialog.add(new HorizontalLayout(comentarios));
 
 
+        for(Usuarios u : users){
+
+            usersid.add(u.getId());
+        }
+        usuarios.setItems(usersid);
+
+        //for(Equipos e : equipo){
+            //equipoid.add(e.getIdEquipo());
+        //}
+        //equipos.setItems(equipoid);
+
+
         //nos creamos el boton de aceptar para confirmar el nuevo prestamo
         Button aceptar = new Button("Añadir",event -> {
-            Prestamos prestamo = new Prestamos(4,id_Usuario.getValue(),id_Equipo.getValue(),fechaIni.getValue(),fechaFin.getValue(),fechaReal.getValue(),comentarios.getValue());
+            Prestamos prestamo = new Prestamos(4,usuarios.getValue(),id_Equipo.getValue(),fechaIni.getValue(),fechaFin.getValue(),fechaReal.getValue(),comentarios.getValue());
 
-            prestamo.setUsuario_Id(id_Usuario.getValue());
+            prestamo.setUsuario_Id(usuarios.getValue());
             prestamo.setEquipo_Id(id_Equipo.getValue());
             prestamo.setFecha_Inicio_Prestamo(fechaIni.getValue());
             prestamo.setFecha_Fin_Prestamo(fechaFin.getValue());

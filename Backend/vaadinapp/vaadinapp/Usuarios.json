@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "Nombre": "Miguel",
+    "Nombre": "Ramon",
     "Departamento": "Contabilidad",
     "Ubicacion": "Pozuelo",
     "telefono": 638424986,
@@ -9,7 +9,7 @@
   },
   {
     "id": 1,
-    "Nombre": "Miguel",
+    "Nombre": "Ramon",
     "Departamento": "Contabilidad",
     "Ubicacion": "Pozuelo",
     "telefono": 638424986,
@@ -17,10 +17,10 @@
   },
   {
     "id": 0,
-    "Nombre": "Lucia",
+    "Nombre": "Miguel",
     "Departamento": "Informatica",
     "Ubicacion": "Madrid",
-    "telefono": 698745258,
-    "email": "luciaufv@gmail.com"
+    "telefono": 603475803,
+    "email": "miguelufv@gmail.com"
   }
 ]

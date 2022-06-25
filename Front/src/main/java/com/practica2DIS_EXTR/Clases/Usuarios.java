@@ -31,8 +31,8 @@ public class Usuarios {
     }
 
 
-    public Usuarios(String Nombre, String Departamento, String Ubicacion, int telefono, String email) {
-
+    public Usuarios(int id,String Nombre, String Departamento, String Ubicacion, int telefono, String email) {
+        this.id = id;
         this.email = email;
         this.Departamento = Departamento;
         this.Nombre = Nombre;
